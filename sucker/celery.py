@@ -9,7 +9,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'celerybeat.settings')
 app = Celery('celerybeat',
              broker='redis://localhost:6379',
              backend='django-db',
-             include=['celerybeat.tasks'],)
+             include=['sucker.tasks'],)
 
 # Using a string here means the worker doesn't have to serialize
 # the configuration object to child processes.

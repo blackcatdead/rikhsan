@@ -1,6 +1,6 @@
 
 from __future__ import absolute_import, unicode_literals
-from celerybeat.celery import app
+from sucker.celery import app
 # from django_celery_results.models import TaskResult
 
 
