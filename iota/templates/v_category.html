@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+{% load static %}
+{% load humanize %}
+
+{% block head %}
+<meta name="Description" CONTENT="{{ post.description }}">
+<title>Kategori: {{category|title}} | Rikhsan.com</title>
+<meta name="robots" content="noindex,nofollow">
+{% endblock %}
+
+{% block content %}
+<h1 class="page_title"><a href="{% url 'allcategory' %}">CATEGORY</a> : <a href="{% url 'category' category|slugify %}">{{category|title}}</a> 
+	{% if page is not 1 %}
+         | halaman {{posts.number}}
+    {% endif %}
+</h1>                         
+<div class="row">
+    <div class="col col_12_of_12">
+        <!-- Layout post 1 -->
+        
+        {% if not posts.has_previous %}
+			<div class="layout_post_1">
+                <div class="item_thumb">
+                    <div class="thumb_hover">
+                        <a href="{% url 'artikel' posts.0.post.id_post posts.0.post.titleslug %}">
+                        	{% if posts.0.post.image %}
+                                <img src="{{ posts.0.post.image.url }}" alt="{{ posts.0.post.title }}">
+                            {% else %}
+                                <img class="img-fluid" src="/media/img/noimg.png" />
+                            {% endif %}
+                        </a>
+                    </div>
+                    <div class="thumb_meta">
+                        <span class="category"><a href="{% url 'site' posts.0.post.site|slugify %}">{{ posts.0.post.site }}</a></span>
+                        <span class="comments">
+                        	<a href="{% url 'category' posts.0.post.categorysplit.0.category.category|slugify %}">{{posts.0.post.categorysplit.0.category.category|title}}</a>
+                        </span>
+                    </div>
+                </div>
+                <div class="item_content">
+                    <h4><a href="{% url 'artikel' posts.0.post.id_post posts.0.post.titleslug %}">{{ posts.0.post.title }}</a></h4>
+                    <p>{{  posts.0.post.content2|truncatewords:25 }}</p>
+                </div>
+            </div><!-- End Layout post 1 -->
+		{% else %}
+			<div class="layout_post_2 clearfix">
+                <div class="item_thumb">
+                    <div class="thumb_hover">
+                        <a href="{% url 'artikel' posts.0.post.id_post posts.0.post.titleslug %}">
+                        	{% if posts.0.post.image %}
+                                <img src="{{ posts.0.post.image.url }}" alt="{{ posts.0.post.title }}">
+                            {% else %}
+                                <img class="img-fluid" src="/media/img/noimg.png" />
+                            {% endif %}
+                        </a>
+                    </div>
+                    <div class="thumb_meta">
+                        <span class="category"><a href="{% url 'site' posts.0.post.site|slugify %}">{{ posts.0.post.site }}</a></span>
+                        <span class="comments"><a href="post_single.html">
+                        	<a href="{% url 'category' posts.0.post.categorysplit.0.category.category|slugify %}">{{posts.0.post.categorysplit.0.category.category|title}}</a>
+                        </a></span>
+                    </div>
+                </div>
+                <div class="item_content">
+                    <h4><a href="{% url 'artikel' posts.0.post.id_post posts.0.post.titleslug %}">{{ posts.0.post.title }}</a></h4>
+                    <p>{{  posts.0.post.content2|truncatewords:25 }}</p>
+                    <div class="item_meta clearfix">
+                    	<span class="meta_date">{{ posts.0.post.timehuman}}</span>
+                    <!-- <span class="meta_likes"><a href="#">29</a></span> -->
+                	</div>
+                </div>
+            </div>
+		{% endif %}
+        {% for berita in posts %}
+        	{% if not forloop.first %}  
+                <div class="layout_post_2 clearfix">
+                    <div class="item_thumb">
+                     <!--    <div class="thumb_icon">
+                            <a href="post_single.html"><i class="fa fa-copy"></i></a>
+                        </div> -->
+                        <div class="thumb_hover">
+                            <a href="{% url 'artikel' berita.post.id_post berita.post.titleslug %}">
+                            	{% if berita.post.image %}
+                                    <img src="{{ berita.post.image.url }}" alt="{{ berita.post.title }}">
+                                {% else %}
+                                    <img class="img-fluid" src="/media/img/noimg.png" />
+                                {% endif %}
+                            </a>
+                        </div>
+                        <div class="thumb_meta">
+                            <span class="category"><a href="{% url 'site' berita.post.site|slugify %}">{{ berita.post.site }}</a></span>
+                            <span class="comments">
+                            	<a href="{% url 'category' berita.post.categorysplit.0.category.category|slugify %}">{{berita.post.categorysplit.0.category.category|title}}</a>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="item_content">
+                        <h4><a href="{% url 'artikel' berita.post.id_post berita.post.titleslug %}">{{ berita.post.title }}</a></h4>
+                        <p>{{ berita.post.content2|truncatewords:25 }}</p>
+                        <div class="item_meta clearfix">
+                        	<span class="meta_date">{{ berita.post.timehuman}}</span>
+                        <!-- <span class="meta_likes"><a href="#">29</a></span> -->
+                   	 	</div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+
+    </div>
+</div>
+{% if posts.paginator.num_pages > 1 %}
+	<ul class="page-numbers">
+		{% if not posts.number == 1 %}
+			<li><a class="page-numbers" href="{% url 'category' category 1 %}"><<</a></li>
+		{% endif %}
+		{% if posts.has_previous %}
+			<li><a class="page-numbers" href="{% url 'category' category posts.previous_page_number %}"><</a></li>
+		{% endif %}
+		{% for i in posts.paginator.page_range %}
+			{% if posts.number == i %}
+				<li><span class="page-numbers current">{{ i }}</span></li>
+			{% else %}
+				<li><a class="page-numbers" href="{% url 'category' category i %}">{{ i }}</a></li>
+			{% endif %}
+		
+	    {% endfor %}
+		{% if posts.has_next %}
+			<li><a class="page-numbers" href="{% url 'category' category posts.next_page_number %}">></a></li>
+		{% endif %}
+		{% if not posts.number == posts.paginator.num_pages %}
+			<li><a class="page-numbers" href="{% url 'category' category posts.paginator.num_pages %}">>></a></li>
+		{% endif %}
+	</ul><!-- End Pagination -->
+{% endif %}
+{% endblock %}
+
+{% block foot %}
+{% endblock %}

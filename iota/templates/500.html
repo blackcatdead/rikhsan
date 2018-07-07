@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %}
+{% load humanize %}
+{% load mathfilters %}
+
+{% block head %}
+<meta name="Description" CONTENT="{{ post.description }}">
+<title>Semua Author | Rikhsan.com</title>
+<meta name="robots" content="noindex,nofollow">
+{% endblock %}
+
+{% block content %}
+<!-- Page title -->
+<h1 class="page_title">Page not found</h1><!-- End Page title -->
+<!-- 404 Page -->
+<div class="page_404">
+    <h3>500</h3>
+    <h4>Something went terribly wrong...</h4>
+    <p>But don't worry, it can happen to the best of us - and it just happen to you!<br>
+    You can search something else or read this text one more time.</p>
+    <form>
+        <input type="text" placeholder="Type and press enter...">
+    </form>
+</div><!-- End 404 Page -->
+{% endblock %}
+
+{% block foot %}
+{% endblock %}

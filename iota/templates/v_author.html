@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% load static %}
+{% load humanize %}
+{% load mathfilters %}
+
+{% block head %}
+<meta name="Description" CONTENT="{{ post.description }}">
+<title>Semua Tag | Rikhsan.com</title>
+<meta name="robots" content="noindex,nofollow">
+{% endblock %}
+
+{% block content %}
+<!-- Page title -->
+<div class="head_title"><h2><a href="{% url 'allauthor' %}">Author</a> | <a href="{% url 'author' author.id %}">{{ author.username }}</a></h2> </div>
+<div class="row">
+	<div class="col col_4_of_12">
+		<figure class="wp-caption alignleft" jquery="">
+            <a href="{{ author.avatar.url }}" class="popup_link"><img src="{{ author.image_thumbnail.url }}" alt="{{ author.first_name }} {{ author.last_name }}"></a>
+            <figcaption class="wp-caption-text"></figcaption>
+        </figure>
+	</div>
+	<div class="col col_8_of_12">
+		<table class="table_black">
+            <tbody>
+            	<tr>
+                    <td>Username </td>
+                    <td>: <a href="#"><strong>{{ author.username }}</strong></a></td>
+                </tr>
+                <tr>
+                    <td>Nama </td>
+                    <td>: <a href="#"><strong>{{ author.first_name }} {{ author.last_name }}</strong></a></td>
+                </tr>
+<!--                         <tr>
+                    <td>Email </td>
+                    <td>: <strong>{{ author.email }}</strong></td>
+                </tr> -->
+                <tr>
+                	<td>Total Artikel</td>
+                	<td>: <a href="#"><strong>{{ authorpost.paginator.count }}</strong></a></td>
+                </tr>
+                <tr>
+                    <td colspan="2"> <blockquote>
+                        <p><span>"</span>{{ author.description }}<span>"</span></p>
+                    </blockquote></td>
+                </tr>
+            </tbody>
+        </table>
+	</div>
+</div>
+<div class="panel_title">
+    <div>
+        <h4><a href="{% url 'author' author.id %}">ARTIKEL</a>  
+        	{% if authorpost.number > 1 %}
+	        	| halaman {{ authorpost.number }}
+			{% endif %}</h4>
+    </div>
+</div>
+<div class="tb_widget_timeline clearfix">
+    <!-- Article -->
+    {% for post in authorpost %}
+    	<article>
+    		
+                <span class="date">{{ post.timehuman }}</span>
+                <div class="timeline_content">
+                    <i class="fa fa-clock-o" jquery=""></i>
+                	<a href="{% url 'artikel' post.id_post post.titleslug %}">
+                    	{% if post.image %}
+                            <img src="{{ post.image_thumbnail.url }}" alt="{{ post.title }}" class="visible animated">
+                        {% else %}
+                            <!-- <img class="img-fluid" src="/media/img/noimg.png" /> -->
+                        {% endif %}
+	                    <h3>{{ post.title }}</h3>
+                    </a>
+                    <p>{{ post.content2|truncatewords:25 }}</p>
+                </div>
+            
+        </article><!-- End Article -->
+    {% endfor %}
+    {% if not authorpost %}
+    <center>Belum ada artikel</center>
+    {% endif %}
+</div>
+{% if authorpost.paginator.num_pages > 1 %}
+	<ul class="page-numbers">
+		{% if not authorpost.number == 1 %}
+			<li><a class="page-numbers" href="{% url 'author' author.id 1 %}"><<</a></li>
+		{% endif %}
+		{% if authorpost.has_previous %}
+			<li><a class="page-numbers" href="{% url 'author' author.id authorpost.previous_page_number %}"><</a></li>
+		{% endif %}
+		{% for i in authorpost.paginator.page_range %}
+			{% if authorpost.number == i %}
+				<li><span class="page-numbers current">{{ i }}</span></li>
+			{% else %}
+				<li><a class="page-numbers" href="{% url 'author' author.id i %}">{{ i }}</a></li>
+			{% endif %}
+		
+	    {% endfor %}
+		{% if authorpost.has_next %}
+			<li><a class="page-numbers" href="{% url 'author' author.id authorpost.next_page_number %}">></a></li>
+		{% endif %}
+		{% if not authorpost.number == authorpost.paginator.num_pages %}
+			<li><a class="page-numbers" href="{% url 'author' author.id authorpost.paginator.num_pages %}">>></a></li>
+		{% endif %}
+	</ul><!-- End Pagination -->
+{% endif %}
+{% endblock %}
+
+{% block foot %}
+{% endblock %}

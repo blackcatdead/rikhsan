@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load static %}
+{% load humanize %}
+{% load mathfilters %}
+
+{% block head %}
+<meta name="Description" CONTENT="{{ post.description }}">
+<title>Semua Tag | Rikhsan.com</title>
+<meta name="robots" content="noindex,nofollow">
+{% endblock %}
+
+{% block content %}
+<!-- Page title -->
+<h1 class="page_title">Tag</h1><!-- End Page title -->
+<div class="row">
+    <div class="col col_3_of_12">
+        {% for ta in alltag %}
+            {% if forloop.counter <= alltag.count|intdiv:4 %}
+                <div><a href="{% url 'tag'  ta.tag|slugify %}">{{ ta.tag|title }}</a> ({{ ta.coun }})</div>
+                
+            {% endif %}
+            {% if alltag.count < 4 %}
+                <div><a href="{% url 'tag'  ta.tag|slugify %}">{{ ta.tag|title }}</a> ({{ ta.coun }})</div>
+                
+            {% endif %}
+        {% endfor %}
+    </div>
+    <div class="col col_3_of_12">
+        {% for ta in alltag %}
+            {% if forloop.counter > alltag.count|intdiv:4 and forloop.counter <= alltag.count|intdiv:4|mul:2 %}
+                <div><a href="{% url 'tag'  ta.tag|slugify %}">{{ ta.tag|title }}</a> ({{ ta.coun }})</div>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <div class="col col_3_of_12">
+        {% for ta in alltag %}
+            {% if forloop.counter > alltag.count|intdiv:4|mul:2 and forloop.counter <= alltag.count|intdiv:4|mul:3 %}
+                <div><a href="{% url 'tag'  ta.tag|slugify %}">{{ ta.tag|title }}</a> ({{ ta.coun }})</div>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <div class="col col_3_of_12">
+        {% for ta in alltag %}
+            {% if forloop.counter > alltag.count|intdiv:4|mul:3 and forloop.counter <= alltag.count|intdiv:4|mul:4 %}
+                <div><a href="{% url 'tag'  ta.tag|slugify %}">{{ ta.tag|title }}</a> ({{ ta.coun }})</div>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+{% block foot %}
+{% endblock %}

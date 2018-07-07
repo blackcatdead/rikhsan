@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% load static %}
+{% load humanize %}
+
+{% block head %}
+<title>Berita dan Lifestyle Terkini | Rikhsan.com</title>
+<meta name="Description" CONTENT="{{ post.description }}">
+
+<meta name="robots" content="noindex,nofollow">
+{% endblock %}
+
+{% block content %}
+<!-- Page title -->
+<h1 class="page_title">
+    <a href="{% url 'home' %}">BLOG</a> 
+    {% if page is not 1 %}
+         | halaman {{ page }}
+    {% endif %}
+
+</h1><!-- End Page title -->
+<!-- Row -->
+<div class="row">
+    <div class="col col_12_of_12">
+        {% for berita in posts %}
+            <!-- Layout post 1 -->
+            <div class="layout_post_2 clearfix">
+                <div class="item_thumb">
+                    <div class="thumb_hover">
+                        <a href="{% url 'artikel' berita.id_post berita.titleslug %}">
+                            {% if berita.image %}
+                                <img src="{{ berita.image_thumbnail.url }}" alt="{{ berita.title }}" class="visible animated">
+                            {% else %}
+                                <img class="img-fluid" src="/media/img/noimg.png" />
+                            {% endif %}
+                        </a>
+                    </div>
+                    <div class="thumb_meta">
+                        <span class="category" jQuery><a href="{% url 'site' berita.site|slugify %}">{{ berita.site }}</a></span>
+                        <span class="comments"><a href="{% url 'category' berita.categorysplit.0.category.category|slugify %}">
+                            {{ berita.categorysplit.0.category.category|title }}
+                        </a></span>
+                    </div>
+                </div>
+                <div class="item_content">
+                    <h4><a href="{% url 'artikel' berita.id_post berita.titleslug %}">{{ berita.title }}</a></h4>
+                    <p>{{ berita.content2|truncatewords:25 }}</p>
+                    <div class="item_meta clearfix">
+                    <span class="meta_date">{{ berita.timehuman }}</span>
+                </div>
+                </div>
+            </div><!-- End Layout post 1 -->
+
+        {% endfor %}
+    </div>
+</div>
+<!-- Pagination -->
+{% if posts.paginator.num_pages > 1 %}
+    <ul class="page-numbers">
+        {% if not posts.number == 1 %}
+            <li><a class="page-numbers" href="{% url 'terbaru' 1 %}"><<</a></li>
+        {% endif %}
+        {% if posts.has_previous %}
+            <li><a class="page-numbers" href="{% url 'terbaru' posts.previous_page_number %}"><</a></li>
+        {% endif %}
+        {% for i in posts.paginator.page_range %}
+            {% if posts.number == i %}
+                <li><span class="page-numbers current">{{ i }}</span></li>
+            {% else %}
+                <li><a class="page-numbers" href="{% url 'terbaru' i %}">{{ i }}</a></li>
+            {% endif %}
+        
+        {% endfor %}
+        {% if posts.has_next %}
+            <li><a class="page-numbers" href="{% url 'terbaru' posts.next_page_number %}">></a></li>
+        {% endif %}
+        {% if not posts.number == posts.paginator.num_pages %}
+            <li><a class="page-numbers" href="{% url 'terbaru' posts.paginator.num_pages %}">>></a></li>
+        {% endif %}
+    </ul><!-- End Pagination -->
+{% endif %}
+<!-- End Row -->
+{% endblock %}
+
+{% block foot %}
+{% endblock %}

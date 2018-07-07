@@ -1,0 +1,143 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="google-site-verification" content="+nxGUDJ4QpAZ5l9Bsjdi102tLVC21AIh5d1Nl23908vVuFHs34="/>
+        <!-- Favicons -->
+        <!-- <link rel="shortcut icon" type="image/png" href="{% static ''%}img/rikhsan.png"/> -->
+        <!-- <link rel="icon" href="{% static ''%}img/rikhsan.png"> --> 
+        {% block head %}
+        {% endblock %}
+        <link rel="icon" 
+          type="image/png" 
+          href="{% static ''%}img/rikhsan.png">
+        <!-- Styles -->
+        <link rel="stylesheet" href="{% static ''%}trendyblog/css/normalize.css">
+        <link rel="stylesheet" href="{% static ''%}trendyblog/css/fontawesome.css">
+        <link rel="stylesheet" href="{% static ''%}trendyblog/css/weather.css">
+        <link rel="stylesheet" href="{% static ''%}trendyblog/css/colors.css">
+        <link rel="stylesheet" href="{% static ''%}trendyblog/css/typography.css">
+        <link rel="stylesheet" href="{% static ''%}trendyblog/css/style.css"> 
+        
+        <!-- Responsive -->
+        <link rel="stylesheet" type="text/css" media="(max-width:768px)" href="{% static ''%}trendyblog/css/responsive-0.css">
+        <link rel="stylesheet" type="text/css" media="(min-width:769px) and (max-width:992px)" href="{% static ''%}trendyblog/css/responsive-768.css">
+        <link rel="stylesheet" type="text/css" media="(min-width:993px) and (max-width:1200px)" href="{% static ''%}trendyblog/css/responsive-992.css">
+        <link rel="stylesheet" type="text/css" media="(min-width:1201px)" href="{% static ''%}trendyblog/css/responsive-1200.css">
+        <link href='http://fonts.googleapis.com/css?family=Titillium+Web:300,300italic,400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+        <style type="text/css">
+            body
+            {
+                background-image: url({% static ''%}img/body/8.png)
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Wrapper -->
+        <div id="wrapper" class="boxed">            
+            <!-- Header -->
+            <header id="header" role="banner">                
+                <!-- Header meta -->
+                <div class="header_meta">
+                    <div class="container">
+                        <!-- Weather forecast -->
+                        <div class="weather_forecast" style="visibility: hidden;">
+                            rikhsan.com
+                        </div><!-- End Weather forecast -->
+                        <!-- Top menu -->
+                        <nav class="top_navigation" role="navigation">
+                            <span class="top_navigation_toggle"><i class="fa fa-reorder"></i></span>
+                            <ul class="menu">
+                                <li><a href="{% url 'kebijakanprivasi' %}">Kebijakan Privasi<div class="subtitle"></div></a></li>
+                                <li><a href="{% url 'disclaimer' %}">Disclaimer<div class="subtitle"></div></a></li>
+                                <li><a href="{% url 'kontak' %}">Kontak<div class="subtitle"></div></a></li>
+                                <li class="menu-item-has-children">
+                                    <a href="#">Peta Situs<div class="subtitle"></div></a>
+                                    <span class="top_sub_menu_toggle"></span>
+                                    <ul class="sub-menu">
+                                        <li><a href="{% url 'post_sitemap' %}">Peta Artikel</a></li>
+                                        <li><a href="{% url 'category_sitemap' %}">Peta Kategori</a></li>
+                                        <li><a href="{% url 'tag_sitemap' %}">Peta Tag</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </nav><!-- End Top menu -->
+                    </div>
+                </div><!-- End Header meta -->
+                <!-- Header main -->
+                <div id="header_main" class="sticky header_main">
+                    <div class="container">
+                        <!-- Logo -->
+                        <div class="site_brand">
+                            <h1 id="site_title"><a href="{% url 'home' %}">rikhsan<span>.com</span></a></h1>
+                            <h2 id="site_description">Berita dan Lifestyle Terkini</h2>
+                        </div><!-- End Logo -->
+                        <!-- Site navigation -->
+                        <nav class="site_navigation" role="navigation">
+                            <span class="site_navigation_toggle"><i class="fa fa-reorder"></i></span>
+                            <ul class="menu">
+                                <li><a href="{% url 'terbaru' %}">Terkini<div class="subtitle"></div></a></li>
+                                <li><a href="{% url 'allcategory' %}">Kategori<div class="subtitle"></div></a></li>
+                                <li><a href="{% url 'alltag' %}">Tag<div class="subtitle"></div></a></li>
+                                <!-- <li><a href="{% url 'allcategory' %}">0ite<div class="subtitle"></div></a></li> -->
+                                <li><a href="{% url 'allauthor' %}">Penulis<div class="subtitle"></div></a></li>
+                                <li class="search_icon_form"><a href="#"><i class="fa fa-search"></i></a>
+                                    <div class="sub-search">
+                                        <form method="GET" action="{% url 'pencarian' %}">
+                                            <input type="search" name="q" placeholder="Pencarian">
+                                            <input type="submit" value="Cari">
+                                        </form>
+                                    </div>
+                                </li>
+                                
+                            </ul>
+                        </nav><!-- End Site navigation -->
+                    </div>
+                </div><!-- End Header main -->
+            </header><!-- End Header -->
+            <!-- Section -->
+            <section>
+                <div class="container">
+                    <div class="row">
+
+                        <!-- Main content -->
+
+                        <div class="col col_{% if page == '404' or page == '500'%}12{% else %}9{% endif %}_of_12">
+                            
+                            {% block content %}{% endblock %}
+                        </div><!-- End Main content -->
+                        <!-- Sidebar -->
+                        {% if page != '404' and page != '500' %}
+                            <div class="col col_3_of_12">
+                                {% include "sidebar.html" %}
+                            </div>
+                        {% endif %}
+                        <!-- End Sidebar -->
+                    </div>
+                </div>
+            </section><!-- End Section -->
+
+            <!-- Copyright -->
+            <div id="copyright" role="contentinfo">
+                <div class="container">
+                    <p>&copy; 2018 rikhsan <a href="http://rikhsan.com">simple BLOG</a></p>
+                </div>
+            </div><!-- End Copyright -->
+        </div><!-- End Wrapper -->
+        <!-- Scripts -->
+        <script type="text/javascript" src="{% static ''%}trendyblog/js/jqueryscript.min.js"></script>        
+        <script type="text/javascript" src="{% static ''%}trendyblog/js/jqueryuiscript.min.js"></script>
+        <script type="text/javascript" src="{% static ''%}trendyblog/js/easing.min.js"></script>        
+        <script type="text/javascript" src="{% static ''%}trendyblog/js/smoothscroll.min.js"></script>        
+        <script type="text/javascript" src="{% static ''%}trendyblog/js/magnific.min.js"></script>        
+        <script type="text/javascript" src="{% static ''%}trendyblog/js/bxslider.min.js"></script>        
+        <script type="text/javascript" src="{% static ''%}trendyblog/js/fitvids.min.js"></script>
+        <script type="text/javascript" src="{% static ''%}trendyblog/js/viewportchecker.min.js"></script>        
+        <script type="text/javascript" src="{% static ''%}trendyblog/js/init.js"></script>    
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        {% block foot %}
+        {% endblock %}    
+    </body>
+</html>

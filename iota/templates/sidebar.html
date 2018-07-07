@@ -1,0 +1,71 @@
+
+{% if populer %}
+	<div class="widget">
+	    <div class="widget_title"><h3>TRENDING</h3></div>
+	    <div class="tb_widget_top_rated clearfix">
+	        {% for pop in populer %}
+	             <!-- Post item -->
+	            <div class="item clearfix">
+	                <div class="item_thumb clearfix">
+	                    <a href="{% url 'artikel' pop.id_post pop.titleslug %}">
+	                        {% if pop.image %}
+	                            <img src="{{ pop.image_thumbnail.url }}" alt="{{ pop.title }}">
+	                        {% else %}
+	                        {% endif %}
+	                </a>
+	                </div>
+	                <div class="item_content">
+	                    <h4><a href="{% url 'artikel' pop.id_post pop.titleslug %}">{{ pop.title }}</a></h4>
+	                </div>
+	                <div class="order">{{ forloop.counter }}</div>
+	            </div><!-- End Post item -->
+	        {% endfor %}
+	    </div>
+	</div><!-- End widget top rated -->
+{% endif %}
+
+{% if tags %}
+    <!-- Widget Tags -->
+    <div class="widget">
+        <div class="widget_title"><h3><a href="{% url 'alltag' %}">TOP Tag</a></h3></div>
+        <div class="tb_widget_tagcloud clearfix">
+            {% for t in tags %}
+                <a href="{% url 'tag' t.tag_id__tag|slugify %}">{{ t.tag_id__tag|title }}</a>
+            {% endfor %}
+        </div>
+    </div><!-- End Widget Tags -->
+{% endif %}
+
+{% if penulis %}
+	<!-- Widget Banners 125 -->
+	<div class="widget">
+	    <div class="widget_title"><a href="{% url 'allauthor' %}"><h3>Penulis</h3></a></div>
+	    <div class="tb_widget_banner_125 clearfix">
+	        {% for p in penulis %}
+	             <a href="{% url 'author' p.id %}">
+	                <img src="{{ p.image_thumbnail.url }}" alt="{{ p.first_name }} {{ p.last_name }}">
+	            </a>
+	        {% endfor %}
+	    </div>
+	</div><!-- End Widget Banners 125 -->	
+{% endif %}
+
+{% if terbaru %}
+	<!-- Widget posts -->
+	<div class="widget">
+	    <div class="widget_title"><h3>Terbaru</h3></div>
+	    <div class="tb_widget_posts_big clearfix">
+	        {% for p in terbaru %}
+	            <!-- Post item -->
+	            <div class="item clearfix">
+	                <div class="item_content">
+	                    <h4><a href="{% url 'artikel' p.id_post p.title|slugify %}"><span class="format" jQuery>{{ p.site }}</span>{{ p.title }}</a></h4>
+	                    <div class="item_meta clearfix">
+	                        <span class="meta_date">{{ p.timehuman }}</span>
+	                    </div>
+	                </div>
+	            </div><!-- End Post item -->
+	        {% endfor %}
+	    </div>
+	</div><!-- End Widget posts -->
+{% endif %}
