@@ -24,10 +24,8 @@ def xsum2(numbers):
 
 @app.task
 def topic_kompas(numbers):
-	# TaskResult.objects.all().delete()
 	from sucker.grab.kompas import visitTopic
 	return visitTopic(url,limit)
-	return 1
 
 @app.task
 def topic_liputan6(url,limit):
