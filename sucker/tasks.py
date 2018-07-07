@@ -25,7 +25,7 @@ def xsum2(numbers):
 @app.task
 def topic_kompas(numbers):
 	# TaskResult.objects.all().delete()
-	rom sucker.grab.kompas import visitTopic
+	from sucker.grab.kompas import visitTopic
 	return visitTopic(url,limit)
 	return 1
 
