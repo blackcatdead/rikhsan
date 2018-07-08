@@ -40,6 +40,7 @@ urlpatterns = [
     url(r'^$', views.terbaru, name='home'),
     url(r'^artikel/([0-9]+)/()', views.post, name='artikel'),
     
+    url(r'^category/', views.allcategory, name='category'),
     url(r'^category/([\w\-]+)/([0-9]+)', views.showcategory, name='category'),
     url(r'^category/([\w\-]+)', views.showcategory, name='category'),
     url(r'^tag/([\w\-]+)/([0-9]+)', views.showtag, name='tag'),
@@ -48,7 +49,7 @@ urlpatterns = [
     url(r'^site/([\w\-]+)', views.showsite, name='site'),
     url(r'^allauthor/([\w\-]+)', views.showauthor, name='allauthor'),
     url(r'^allauthor/', views.showauthor, name='allauthor'),
-     url(r'^author/([\w\-]+)/([\w\-]+)', views.author, name='author'),
+    url(r'^author/([\w\-]+)/([\w\-]+)', views.author, name='author'),
     url(r'^author/([\w\-]+)', views.author, name='author'),
    
 
