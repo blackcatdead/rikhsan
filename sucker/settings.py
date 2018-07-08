@@ -130,7 +130,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
-MEDIA_ROOT= os.path.join(BASE_DIR, 'media')
+# MEDIA_ROOT= os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT= 'media/'
 MEDIA_URL= "/media/"
 # BROKER_URL = 'amqp://redis://localhost:6379/0'
 # CRISPY_TEMPLATE_PACK = 'uni_form'
