@@ -25,7 +25,7 @@ from bs4 import BeautifulSoup
 from django.conf import settings
 
 class User(AbstractUser):
-    avatar= models.ImageField(blank=True, null=True, upload_to=settings.MEDIA_ROOT+'/users')
+    avatar= models.ImageField(blank=True, null=True, upload_to='users')
     description = models.TextField(blank=True, null=True)
     image_thumbnail = ImageSpecField(source='avatar', processors=[ResizeToFill(200,200)], format='JPEG', options={'quality':60})
 
