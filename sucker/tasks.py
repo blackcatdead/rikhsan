@@ -22,12 +22,12 @@ def xsum(numbers):
 def xsum2(numbers):
     return sum(numbers)
 
-# @app.task
-# def topic_kompas(numbers):
-# 	from sucker.grab.kompas import visitTopic
-# 	return visitTopic(url,limit)
+@app.task
+def topic_kompas(numbers):
+	from sucker.grab.kompas import visitTopic
+	return visitTopic(url,limit)
 
-# @app.task
-# def topic_liputan6(url,limit):
-# 	from sucker.grab.liputan6 import visitTopic
-# 	return visitTopic(url,limit)
+@app.task
+def topic_liputan6(url,limit):
+	from sucker.grab.liputan6 import visitTopic
+	return visitTopic(url,limit)
