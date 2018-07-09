@@ -25,9 +25,9 @@ urlpatterns = [
     url(r'^reset', views.resetdatabase, name='reset'),
 ]
 
-from django.conf import settings
-from django.views.static import serve
-if settings.DEBUG:
-    urlpatterns +=[
-        url(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT,}),
-    ]
+# from django.conf import settings
+# from django.views.static import serve
+# if settings.DEBUG:
+#     urlpatterns +=[
+#         url(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT,}),
+#     ]
