@@ -1,9 +1,9 @@
 # rikhsan
 damnproject
 
-celery -A celerybeat beat -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler
+celery -A sucker beat -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler
 
-celery -A celerybeat worker -l info
+celery -A sucker worker -l info
 celery -A celerybeat worker -l info
 
 
