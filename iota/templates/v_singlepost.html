@@ -5,7 +5,7 @@
 {% block head %}
 <meta name="Description" CONTENT="{{ post.description }}">
 <title>{{post.title|title}} | Rikhsan.com</title>
-<meta name="robots" content="noindex,nofollow">
+<!-- <meta name="robots" content="noindex,nofollow"> -->
 <meta content="{% for ta in post.tagsplit %}{% if forloop.last %}{{ta.tag.tag|title}}{% else %}{{ta.tag.tag|title}}, {% endif %}{% endfor %}" name="keywords"/>
 {% endblock %}
 
