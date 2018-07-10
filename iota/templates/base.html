@@ -101,20 +101,8 @@
             <section>
                 <div class="container">
                     <div class="row">
-
-                        <!-- Main content -->
-
-                        <div class="col col_{% if page == '404' or page == '500'%}12{% else %}9{% endif %}_of_12">
-                            
-                            {% block content %}{% endblock %}
-                        </div><!-- End Main content -->
-                        <!-- Sidebar -->
-                        {% if page != '404' and page != '500' %}
-                            <div class="col col_3_of_12">
-                                {% include "sidebar.html" %}
-                            </div>
-                        {% endif %}
-                        <!-- End Sidebar -->
+                        {% block content %}{% endblock %}
+                        
                     </div>
                 </div>
             </section><!-- End Section -->

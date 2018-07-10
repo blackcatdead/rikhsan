@@ -9,202 +9,136 @@
 {% endblock %}
 
 {% block content %}
-<div class="container">
+<!-- Main content -->
+<div class="col col_9_of_12">
+	<h1 class="page_title">SITE: <a href="{% url 'site' site|slugify %}">{{site|title}}</a> ({{posts.number}}/{{posts.paginator.num_pages}})</h1>                          
     <div class="row">
-        <!-- Main content -->
-        <div class="col col_9_of_12">
+        <div class="col col_12_of_12">
+            <!-- Layout post 1 -->
+            
+            {% if not posts.has_previous %}
+				<div class="layout_post_1">
+                    <div class="item_thumb">
+                        <div class="thumb_hover">
+                            <a href="{% url 'artikel' posts.0.id_post posts.0.title|slugify %}">
+                            	{% if posts.0.image %}
+                                    <img src="{{ posts.0.image.url }}" alt="{{ posts.0.title }}">
+                                {% else %}
+                                    <img class="img-fluid" src="/media/img/noimg.png" />
+                                {% endif %}
+                            </a>
+                        </div>
+                        <div class="thumb_meta">
+                            <span class="category"><a href="{% url 'site' site|slugify %}">{{ posts.0.site }}</a></span>
+                            <span class="comments">
+                                <a href="{% url 'category' posts.0.categorysplit.0.category.category|slugify %}">{{posts.0.categorysplit.0.category.category|title }}</a>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="item_content">
+                        <h4><a href="{% url 'artikel' posts.0.id_post posts.0.title|slugify %}">{{ posts.0.title }}</a></h4>
+                        <p>{{  posts.0.content2|truncatewords:25 }}</p>
+                    </div>
+                </div><!-- End Layout post 1 -->
+			{% else %}
+				<div class="layout_post_2 clearfix">
+                    <div class="item_thumb">
+                        <!-- <div class="thumb_icon">
+                            <a href="post_single.html"><i class="fa fa-copy"></i></a>
+                        </div> -->
+                        <div class="thumb_hover">
+                            <a href="{% url 'artikel' posts.0.id_post posts.0.title|slugify %}">
+                            	{% if posts.0.image %}
+                                    <img src="{{ posts.0.image.url }}" alt="{{ posts.0.title }}">
+                                {% else %}
+                                    <img class="img-fluid" src="/media/img/noimg.png" />
+                                {% endif %}
+                            </a>
+                        </div>
+                        <div class="thumb_meta">
+                            <span class="category"><a href="{% url 'site' site|slugify %}">{{ posts.0.site }}</a></span>
+                            <span class="comments">
+                                <a href="{% url 'category' posts.0.categorysplit.0.category.category|slugify %}">{{posts.0.categorysplit.0.category.category|title }}</a>
+                            </a></span>
+                        </div>
+                    </div>
+                    <div class="item_content">
+                        <h4><a href="{% url 'artikel' posts.0.id_post posts.0.title|slugify %}">{{ posts.0.title }}</a></h4>
+                        <p>{{  posts.0.content2|truncatewords:25 }}</p>
+                        <div class="item_meta clearfix">
+                        	<span class="meta_date">{{ posts.0.timehuman}}</span>
+                        <!-- <span class="meta_likes"><a href="#">29</a></span> -->
+                    	</div>
+                    </div>
+                </div>
+			{% endif %}
+            {% for berita in posts %}
+            	{% if not forloop.first %}  
+                    <div class="layout_post_2 clearfix">
+                        <div class="item_thumb">
+                         <!--    <div class="thumb_icon">
+                                <a href="post_single.html"><i class="fa fa-copy"></i></a>
+                            </div> -->
+                            <div class="thumb_hover">
+                                <a href="{% url 'artikel' berita.id_post berita.title|slugify %}">
+                                	{% if berita.image %}
+                                        <img src="{{ berita.image.url }}" alt="{{ berita.title }}">
+                                    {% else %}
+                                        <img class="img-fluid" src="/media/img/noimg.png" />
+                                    {% endif %}
+                                </a>
+                            </div>
+                            <div class="thumb_meta">
+                                <span class="category"><a href="{% url 'site' berita.site|slugify %}">{{ berita.site }}</a></span>
+                                 <span class="comments">
+                                    <a href="{% url 'category' berita.categorysplit.0.category.category|slugify %}">{{ berita.categorysplit.0.category.category|title }}</a>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="item_content">
+                            <h4><a href="{% url 'artikel' berita.id_post berita.title|slugify %}">{{ berita.title }}</a></h4>
+                            <p>{{  berita.content2|truncatewords:25 }}</p>
+                            <div class="item_meta clearfix">
+                            	<span class="meta_date">{{ berita.timehuman}}</span>
+                            <!-- <span class="meta_likes"><a href="#">29</a></span> -->
+                       	 	</div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
 
-            <h1 class="page_title">SITE: <a href="{% url 'site' site|slugify %}">{{site|title}}</a> ({{posts.number}}/{{posts.paginator.num_pages}})</h1>                          
-            <div class="row">
-                <div class="col col_12_of_12">
-                    <!-- Layout post 1 -->
-                    
-                    {% if not posts.has_previous %}
-						<div class="layout_post_1">
-	                        <div class="item_thumb">
-	                            <div class="thumb_hover">
-	                                <a href="{% url 'artikel' posts.0.id_post posts.0.title|slugify %}">
-	                                	{% if posts.0.image %}
-	                                        <img src="{{ posts.0.image.url }}" alt="{{ posts.0.title }}">
-	                                    {% else %}
-	                                        <img class="img-fluid" src="/media/img/noimg.png" />
-	                                    {% endif %}
-	                                </a>
-	                            </div>
-	                            <div class="thumb_meta">
-	                                <span class="category"><a href="{% url 'site' site|slugify %}">{{ posts.0.site }}</a></span>
-	                                <span class="comments">
-	                                    <a href="{% url 'category' posts.0.categorysplit.0.category.category|slugify %}">{{posts.0.categorysplit.0.category.category|title }}</a>
-	                                </span>
-	                            </div>
-	                        </div>
-	                        <div class="item_content">
-	                            <h4><a href="{% url 'artikel' posts.0.id_post posts.0.title|slugify %}">{{ posts.0.title }}</a></h4>
-	                            <p>{{  posts.0.content2|truncatewords:25 }}</p>
-	                        </div>
-	                    </div><!-- End Layout post 1 -->
-					{% else %}
-						<div class="layout_post_2 clearfix">
-	                        <div class="item_thumb">
-	                            <!-- <div class="thumb_icon">
-	                                <a href="post_single.html"><i class="fa fa-copy"></i></a>
-	                            </div> -->
-	                            <div class="thumb_hover">
-	                                <a href="{% url 'artikel' posts.0.id_post posts.0.title|slugify %}">
-	                                	{% if posts.0.image %}
-	                                        <img src="{{ posts.0.image.url }}" alt="{{ posts.0.title }}">
-	                                    {% else %}
-	                                        <img class="img-fluid" src="/media/img/noimg.png" />
-	                                    {% endif %}
-	                                </a>
-	                            </div>
-	                            <div class="thumb_meta">
-	                                <span class="category"><a href="{% url 'site' site|slugify %}">{{ posts.0.site }}</a></span>
-	                                <span class="comments">
-                                        <a href="{% url 'category' posts.0.categorysplit.0.category.category|slugify %}">{{posts.0.categorysplit.0.category.category|title }}</a>
-	                                </a></span>
-	                            </div>
-	                        </div>
-	                        <div class="item_content">
-	                            <h4><a href="{% url 'artikel' posts.0.id_post posts.0.title|slugify %}">{{ posts.0.title }}</a></h4>
-	                            <p>{{  posts.0.content2|truncatewords:25 }}</p>
-	                            <div class="item_meta clearfix">
-	                            	<span class="meta_date">{{ posts.0.timehuman}}</span>
-	                            <!-- <span class="meta_likes"><a href="#">29</a></span> -->
-	                        	</div>
-	                        </div>
-	                    </div>
-					{% endif %}
-                    {% for berita in posts %}
-                    	{% if not forloop.first %}  
-                            <div class="layout_post_2 clearfix">
-		                        <div class="item_thumb">
-		                         <!--    <div class="thumb_icon">
-		                                <a href="post_single.html"><i class="fa fa-copy"></i></a>
-		                            </div> -->
-		                            <div class="thumb_hover">
-		                                <a href="{% url 'artikel' berita.id_post berita.title|slugify %}">
-		                                	{% if berita.image %}
-		                                        <img src="{{ berita.image.url }}" alt="{{ berita.title }}">
-		                                    {% else %}
-		                                        <img class="img-fluid" src="/media/img/noimg.png" />
-		                                    {% endif %}
-		                                </a>
-		                            </div>
-		                            <div class="thumb_meta">
-		                                <span class="category"><a href="{% url 'site' berita.site|slugify %}">{{ berita.site }}</a></span>
-		                                 <span class="comments">
-                                            <a href="{% url 'category' berita.categorysplit.0.category.category|slugify %}">{{ berita.categorysplit.0.category.category|title }}</a>
-		                                </span>
-		                            </div>
-		                        </div>
-		                        <div class="item_content">
-		                            <h4><a href="{% url 'artikel' berita.id_post berita.title|slugify %}">{{ berita.title }}</a></h4>
-		                            <p>{{  berita.content2|truncatewords:25 }}</p>
-		                            <div class="item_meta clearfix">
-		                            	<span class="meta_date">{{ berita.timehuman}}</span>
-		                            <!-- <span class="meta_likes"><a href="#">29</a></span> -->
-		                       	 	</div>
-		                        </div>
-		                    </div>
-                        {% endif %}
-                    {% endfor %}
-
-                </div>
-            </div>
-            {% if posts.paginator.num_pages > 1 %}
-            	<ul class="page-numbers">
-            		{% if not posts.number == 1 %}
-						<li><a class="page-numbers" href="{% url 'site' site|slugify 1 %}"><<</a></li>
-					{% endif %}
-					{% if posts.has_previous %}
-						<li><a class="page-numbers" href="{% url 'site' site|slugify posts.previous_page_number %}"><</a></li>
-					{% endif %}
-					{% for i in posts.paginator.page_range %}
-						{% if posts.number == i %}
-							<li><span class="page-numbers current">{{ i }}</span></li>
-						{% else %}
-							<li><a class="page-numbers" href="{% url 'site' site|slugify i %}">{{ i }}</a></li>
-						{% endif %}
-					
-				    {% endfor %}
-					{% if posts.has_next %}
-						<li><a class="page-numbers" href="{% url 'site' site|slugify posts.next_page_number %}">></a></li>
-					{% endif %}
-					{% if not posts.number == posts.paginator.num_pages %}
-						<li><a class="page-numbers" href="{% url 'site' site|slugify posts.paginator.num_pages %}">>></a></li>
-					{% endif %}
-				</ul><!-- End Pagination -->
-            {% endif %}
-			
-        </div><!-- End Main content -->
-        <!-- Sidebar -->
-	    <div class="col col_3_of_12">
-	        <!-- Widget Search widget -->
-	        <div class="widget">
-	            <div class="widget_title"><h3>Search widget</h3></div>
-	            <div class="tb_widget_search">
-	                <form>
-	                    <input type="text">
-	                    <input type="submit" value="Search">
-	                </form>
-	            </div>
-	        </div><!-- End Widget Search widget -->
-	        <!-- Widget Social widget -->
-	        <div class="widget">
-	            <div class="widget_title"><h3>Socialize</h3></div>
-	            <div class="tb_widget_socialize clearfix">
-	                <a href="http://www.facebook.com/" target="_blank" class="icon facebook">
-	                    <div class="symbol"><i class="fa fa-facebook"></i></div>
-	                    <div class="text"><p>46,841</p><p>Facebook</p></div>
-	                </a>
-	                <a href="https://plus.google.com" target="_blank"  class="icon google">
-	                    <div class="symbol"><i class="fa fa-google-plus"></i></div>
-	                    <div class="text"><p>17,045</p><p>Google+</p></div>
-	                </a>
-	                <a href="http://www.twitter.com/" target="_blank"  class="icon twitter">
-	                    <div class="symbol"><i class="fa fa-twitter"></i></div>
-	                    <div class="text"><p>3,075</p><p>Twitter</p></div>
-	                </a>
-	                <a href="http://www.linkedin.com/" target="_blank"  class="icon linkedin">
-	                    <div class="symbol"><i class="fa fa-linkedin"></i></div>
-	                    <div class="text"><p>15,441</p><p>LinkedIn</p></div>
-	                </a>
-	            </div>
-	        </div><!-- End Widget Social widget -->
-	        <!-- Widget Tags -->
-            <div class="widget">
-                <div class="widget_title"><h3>TOP Tags</h3></div>
-                <div class="tb_widget_tagcloud clearfix">
-                    {% for t in tags %}
-                        <a href="{% url 'tag' t.tag_id__tag|slugify %}">{{ t.tag_id__tag }}</a>
-                    {% endfor %}
-                </div>
-            </div><!-- End Widget Tags -->
-            <!-- Widget posts -->
-            <div class="widget">
-                <div class="widget_title"><h3>TERBARU</h3></div>
-                <div class="tb_widget_posts_big clearfix">
-                	{% for berita in terbaru %}
-    					<!-- Post item -->
-    	                <div class="item clearfix">
-    	                    <div class="item_content">
-    	                        <h4><a href=""><span class="format" jQuery>{{ berita.site }}</span>{{berita.title}}</a></h4>
-    	                        <!-- <p>Aenean eu convallis elit. Quisque non felis vel tortor pellentesque consectetur vitae [...]</p> -->
-    	                        <div class="item_meta clearfix">
-    	                            <span class="meta_date">{{ berita.timehuman }}</span>
-    	                            <!-- <span class="meta_comments"><a href="post_single.html">16</a></span>
-    	                            <span class="meta_likes"><a href="#">0</a></span> -->
-    	                        </div>
-    	                    </div>
-    	                </div><!-- End Post item -->
-    				{% endfor %}
-                    
-                </div>
-            </div><!-- End Widget posts -->
-	    </div><!-- End Sidebar -->
+        </div>
     </div>
-</div>
+    {% if posts.paginator.num_pages > 1 %}
+    	<ul class="page-numbers">
+    		{% if not posts.number == 1 %}
+				<li><a class="page-numbers" href="{% url 'site' site|slugify 1 %}"><<</a></li>
+			{% endif %}
+			{% if posts.has_previous %}
+				<li><a class="page-numbers" href="{% url 'site' site|slugify posts.previous_page_number %}"><</a></li>
+			{% endif %}
+			{% for i in posts.paginator.page_range %}
+				{% if posts.number == i %}
+					<li><span class="page-numbers current">{{ i }}</span></li>
+				{% else %}
+					<li><a class="page-numbers" href="{% url 'site' site|slugify i %}">{{ i }}</a></li>
+				{% endif %}
+			
+		    {% endfor %}
+			{% if posts.has_next %}
+				<li><a class="page-numbers" href="{% url 'site' site|slugify posts.next_page_number %}">></a></li>
+			{% endif %}
+			{% if not posts.number == posts.paginator.num_pages %}
+				<li><a class="page-numbers" href="{% url 'site' site|slugify posts.paginator.num_pages %}">>></a></li>
+			{% endif %}
+		</ul><!-- End Pagination -->
+    {% endif %}
+</div><!-- End Main content -->
+<!-- Sidebar -->
+<div class="col col_3_of_12">
+    {% include "sidebar.html" %}
+</div><!-- End Sidebar -->
+
 {% endblock %}
 
 {% block foot %}

@@ -10,88 +10,97 @@
 {% endblock %}
 
 {% block content %}
-<!-- Page title -->
-<h1 class="page_title">
-    <a href="{% url 'pencarian' %}">Pencarian</a>
-    {% if posts.number > 1 %}
-         | halaman {{ posts.number }}
+<!-- Main content -->
+<div class="col col_9_of_12">
+    <!-- Page title -->
+    <h1 class="page_title">
+        <a href="{% url 'pencarian' %}">Pencarian</a>
+        {% if posts.number > 1 %}
+             | halaman {{ posts.number }}
+        {% endif %}
+
+    </h1><!-- End Page title -->
+    <div class="widget">
+        <div class="tb_widget_search">
+            <form action="{% url 'pencarian' %}" method="GET">
+                <input type="text" name="q" value="{{ query }}">
+                <input type="submit" value="Cari">
+            </form>
+        </div>
+    </div>
+    {% if posts %}
+        <p>Menampilkan {{ posts.start_index }}–{{ posts.end_index }} dari {{ posts.paginator.count }} artikel</p>
+    {% else %}
+        <p>Tidak ditemukan</p>
     {% endif %}
-
-</h1><!-- End Page title -->
-<div class="widget">
-    <div class="tb_widget_search">
-        <form action="{% url 'pencarian' %}" method="GET">
-            <input type="text" name="q" value="{{ query }}">
-            <input type="submit" value="Cari">
-        </form>
-    </div>
-</div>
-{% if posts %}
-	<p>Menampilkan {{ posts.start_index }}–{{ posts.end_index }} dari {{ posts.paginator.count }} artikel</p>
-{% else %}
-	<p>Tidak ditemukan</p>
-{% endif %}
-<!-- Row -->
-<div class="row">
-    <div class="col col_12_of_12">
-        {% for berita in posts %}
-            <!-- Layout post 1 -->
-            <div class="layout_post_2 clearfix">
-                <div class="item_thumb">
-                    <div class="thumb_hover">
-                        <a href="{% url 'artikel' berita.id_post berita.titleslug %}">
-                            {% if berita.image %}
-                                <img src="{{ berita.image_thumbnail.url }}" alt="{{ berita.title }}" class="visible animated">
-                            {% else %}
-                                <img class="img-fluid" src="/media/img/noimg.png" />
-                            {% endif %}
-                        </a>
+    <!-- Row -->
+    <div class="row">
+        <div class="col col_12_of_12">
+            {% for berita in posts %}
+                <!-- Layout post 1 -->
+                <div class="layout_post_2 clearfix">
+                    <div class="item_thumb">
+                        <div class="thumb_hover">
+                            <a href="{% url 'artikel' berita.id_post berita.titleslug %}">
+                                {% if berita.image %}
+                                    <img src="{{ berita.image_thumbnail.url }}" alt="{{ berita.title }}" class="visible animated">
+                                {% else %}
+                                    <img class="img-fluid" src="/media/img/noimg.png" />
+                                {% endif %}
+                            </a>
+                        </div>
+                        <div class="thumb_meta">
+                            <span class="category" jQuery><a href="{% url 'site' berita.site|slugify %}">{{ berita.site }}</a></span>
+                            <span class="comments"><a href="{% url 'category' berita.categorysplit.0.category.category|slugify %}">
+                                {{ berita.categorysplit.0.category.category|title }}
+                            </a></span>
+                        </div>
                     </div>
-                    <div class="thumb_meta">
-                        <span class="category" jQuery><a href="{% url 'site' berita.site|slugify %}">{{ berita.site }}</a></span>
-                        <span class="comments"><a href="{% url 'category' berita.categorysplit.0.category.category|slugify %}">
-                            {{ berita.categorysplit.0.category.category|title }}
-                        </a></span>
+                    <div class="item_content">
+                        <h4><a href="{% url 'artikel' berita.id_post berita.titleslug %}">{{ berita.title }}</a></h4>
+                        <p>{{ berita.content2|truncatewords:25 }}</p>
+                        <div class="item_meta clearfix">
+                        <span class="meta_date">{{ berita.timehuman }}</span>
                     </div>
-                </div>
-                <div class="item_content">
-                    <h4><a href="{% url 'artikel' berita.id_post berita.titleslug %}">{{ berita.title }}</a></h4>
-                    <p>{{ berita.content2|truncatewords:25 }}</p>
-                    <div class="item_meta clearfix">
-                    <span class="meta_date">{{ berita.timehuman }}</span>
-                </div>
-                </div>
-            </div><!-- End Layout post 1 -->
+                    </div>
+                </div><!-- End Layout post 1 -->
 
-        {% endfor %}
+            {% endfor %}
+        </div>
     </div>
-</div>
-<!-- Pagination -->
-{% if posts.paginator.num_pages > 1 %}
-    <ul class="page-numbers">
-        {% if not posts.number == 1 %}
-            <li><a class="page-numbers" href="{% url 'pencarian'  %}?q={{query}}&page=1"><<</a></li>
-        {% endif %}
-        {% if posts.has_previous %}
-            <li><a class="page-numbers" href="{% url 'pencarian'  %}?q={{query}}&page={{ posts.previous_page_number }}"><</a></li>
-        {% endif %}
-        {% for i in posts.paginator.page_range %}
-            {% if posts.number == i %}
-                <li><span class="page-numbers current">{{ i }}</span></li>
-            {% else %}
-                <li><a class="page-numbers" href="{% url 'pencarian'  %}?q={{query}}&page={{ i }}">{{ i }}</a></li>
+    <!-- Pagination -->
+    {% if posts.paginator.num_pages > 1 %}
+        <ul class="page-numbers">
+            {% if not posts.number == 1 %}
+                <li><a class="page-numbers" href="{% url 'pencarian'  %}?q={{query}}&page=1"><<</a></li>
             {% endif %}
-        
-        {% endfor %}
-        {% if posts.has_next %}
-            <li><a class="page-numbers" href="{% url 'pencarian'  %}?q={{query}}&page={{ posts.next_page_number }}">></a></li>
-        {% endif %}
-        {% if not posts.number == posts.paginator.num_pages %}
-            <li><a class="page-numbers" href="{% url 'pencarian'  %}?q={{query}}&page={{ posts.paginator.num_pages }}">>></a></li>
-        {% endif %}
-    </ul><!-- End Pagination -->
-{% endif %}
-<!-- End Row -->
+            {% if posts.has_previous %}
+                <li><a class="page-numbers" href="{% url 'pencarian'  %}?q={{query}}&page={{ posts.previous_page_number }}"><</a></li>
+            {% endif %}
+            {% for i in posts.paginator.page_range %}
+                {% if posts.number == i %}
+                    <li><span class="page-numbers current">{{ i }}</span></li>
+                {% else %}
+                    <li><a class="page-numbers" href="{% url 'pencarian'  %}?q={{query}}&page={{ i }}">{{ i }}</a></li>
+                {% endif %}
+            
+            {% endfor %}
+            {% if posts.has_next %}
+                <li><a class="page-numbers" href="{% url 'pencarian'  %}?q={{query}}&page={{ posts.next_page_number }}">></a></li>
+            {% endif %}
+            {% if not posts.number == posts.paginator.num_pages %}
+                <li><a class="page-numbers" href="{% url 'pencarian'  %}?q={{query}}&page={{ posts.paginator.num_pages }}">>></a></li>
+            {% endif %}
+        </ul><!-- End Pagination -->
+    {% endif %}
+    <!-- End Row -->
+</div><!-- End Main content -->
+<!-- Sidebar -->
+<div class="col col_3_of_12">
+    {% include "sidebar.html" %}
+</div><!-- End Sidebar -->
+
+
 {% endblock %}
 
 {% block foot %}

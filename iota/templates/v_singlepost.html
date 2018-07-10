@@ -10,159 +10,168 @@
 {% endblock %}
 
 {% block content %}
-<!-- Post -->
-<article class="post">
-    {% if post.image %}
-        <!-- Media -->
-        <div class="entry_media">
-            <span class="meta_likes"><a href="#" data-tip="12 likes"><i class="fa fa-heart"></i></a></span>
-            <a href="{{post.image.url}}" class="popup_link">
-                <img src="{{ post.image.url }}" alt="{{ post.title }}" class="visible animated">
-            </a>
-        </div><!-- End Media -->
-    {% endif %}
-    <!-- Full meta -->
-    <div class="full_meta clearfix">
-        <span class="meta_format"><i class="fa fa-user"></i></span>
+<!-- Main content -->
+<div class="col col_9_of_12">
+    <!-- Post -->
+    <article class="post">
+        {% if post.image %}
+            <!-- Media -->
+            <div class="entry_media">
+                <span class="meta_likes"><a href="#" data-tip="12 likes"><i class="fa fa-heart"></i></a></span>
+                <a href="{{post.image.url}}" class="popup_link">
+                    <img src="{{ post.image.url }}" alt="{{ post.title }}" class="visible animated">
+                </a>
+            </div><!-- End Media -->
+        {% endif %}
+        <!-- Full meta -->
+        <div class="full_meta clearfix">
+            <span class="meta_format"><i class="fa fa-user"></i></span>
 
-        <span class=""><a href="{% url 'author' post.author_id %}"> {{ post.author.first_name }} {{ post.author.last_name }}</a></span>
-        <span class="meta_format"><i class="fa fa-calendar"></i></span>
-        <span class=""><a href="#">{{ post.timehuman }} </a></span>
-    </div><!-- End Full meta -->
-    <!-- Entry content -->
-    <div class="entry_content">
-        <!-- Entry title -->
-        <h1 class="entry_title">{{post.title}}</h1><!-- End Entry title -->
-       {% autoescape off %}{{post.content}}<a href="{{post.source}}" target="_blank">Selengkapnya</a>{% endautoescape %}
-    </div><!-- End Entry content -->
-        <div class="bottom_wrapper">
-        <!-- Entry tags -->
-        <div class="entry_tags">
-            <span><i class="fa fa-tags"></i> Label</span>
-            <!-- {{post.tagsplit}} -->
-            <!-- {{post.tags.tagsplit}} -->
-            {% for ta in post.tagsplit %}
-                <a href="{% url 'tag' ta.tag.tag|slugify %}">{{ta.tag.tag|title}}</a>
-            {% endfor %}
-            
-        </div><!-- End Entry tags -->
-        <!-- Entry categories -->
-        <div class="entry_tags categories">
-            <span><i class="fa fa-folder-open"></i> Kategori</span>
-            <!-- {{post.tags.tagsplit}} -->
-            {% for cat in post.categorysplit %}
-                <a href="{% url 'category' cat.category.category %}">{{cat.category.category|title }}</a>
-            {% endfor %}
-            
-        </div><!-- End Entry categories -->
-    </div>
-</article><!-- End Post -->
-<!-- You might also like -->
-<div class="panel_title">
-    <div>
-        <h4><a href="blog.html">ARTIKEL PILIHAN</a></h4>
-    </div>
-</div>
-<div class="row">
-    {% for ran in randomposts %}
-        {% if forloop.counter|divisibleby:2 %}
-            <div class="col col_4_of_12">
-                <!-- Layout post 1 -->
-                <div class="layout_post_1">
-                    <div class="item_thumb">
-                        <div class="thumb_hover">
-                            <a href="{% url 'artikel' ran.id_post ran.title|slugify %}">
-                                {% if ran.image %}
-                                    <img src="{{ ran.image_thumbnail.url }}" alt="{{ ran.title }}" class="visible animated">
-                                {% else %}
-                                    <img src="/media/img/noimg.png" alt="{{ ran.title }}" class="visible animated"/>
-                                {% endif %}
-                            </a>
-                        </div>
-                        <div class="thumb_meta">
-                            <span class="category" jQuery><a href="blog.html">{{ ran.site }}</a></span>
-                            <span class="comments">
-                                {% for cat in ran.categorysplit %}
-                                    {% if forloop.last %}
-                                        <a href="">{{cat.category.category|title}}</a>
-                                    {% endif %}
-                                {% endfor %}
-                            </span>
-                        </div>
-                    </div>
-                    <div class="item_content">
-                        <h4><a href="{% url 'artikel' ran.id_post ran.title|slugify %}">{{ ran.title }}</a></h4>
-                        <div class="item_meta clearfix">
-                            <!-- <span class="meta_date">{{ ran.timehuman }}</span> -->
-                            <!-- <span class="meta_likes"><a href="#">29</a></span> -->
-                        </div>
-                        <!-- <p>{{ ran.description }} <a href="{% url 'artikel' ran.id_post ran.title|slugify %}">[...]</a></p> -->
-                    </div>
-                </div><!-- End Layout post 1 -->
-            </div>
-        {% endif %}
-        
-    {% endfor %}
-</div><!-- End You might also like -->
-<div class="row">
-    {% for ran in randomposts %}
-        {% if not forloop.counter|divisibleby:2 %}
-            <div class="col col_4_of_12">
-                <!-- Layout post 1 -->
-                <div class="layout_post_1">
-                    <div class="item_thumb">
-                        <div class="thumb_hover">
-                            <a href="{% url 'artikel' ran.id_post ran.title|slugify %}">
-                                {% if ran.image %}
-                                    <img src="{{ ran.image_thumbnail.url }}" alt="{{ ran.title }}" class="visible animated">
-                                {% else %}
-                                    <img src="/media/img/noimg.png" alt="{{ ran.title }}" class="visible animated"/>
-                                {% endif %}
-                            </a>
-                        </div>
-                        <div class="thumb_meta">
-                            <span class="category" jQuery><a href="blog.html">{{ ran.site }}</a></span>
-                            <span class="comments">
-                                {% for cat in ran.categorysplit %}
-                                    {% if forloop.last %}
-                                        <a href="">{{cat.category.category|title}}</a>
-                                    {% endif %}
-                                {% endfor %}
-                            </span>
-                        </div>
-                    </div>
-                    <div class="item_content">
-                        <h4><a href="{% url 'artikel' ran.id_post ran.title|slugify %}">{{ ran.title }}</a></h4>
-                        <div class="item_meta clearfix">
-                            <!-- <span class="meta_date">{{ ran.timehuman }}</span> -->
-                            <!-- <span class="meta_likes"><a href="#">29</a></span> -->
-                        </div>
-                        <!-- <p>{{ ran.description }} <a href="{% url 'artikel' ran.id_post ran.title|slugify %}">[...]</a></p> -->
-                    </div>
-                </div><!-- End Layout post 1 -->
-            </div>
-        {% endif %}
-        
-    {% endfor %}
-</div><!-- End You might also like -->
-<!-- Comments -->
-<div id="comments">
+            <span class=""><a href="{% url 'author' post.author_id %}"> {{ post.author.first_name }} {{ post.author.last_name }}</a></span>
+            <span class="meta_format"><i class="fa fa-calendar"></i></span>
+            <span class=""><a href="#">{{ post.timehuman }} </a></span>
+        </div><!-- End Full meta -->
+        <!-- Entry content -->
+        <div class="entry_content">
+            <!-- Entry title -->
+            <h1 class="entry_title">{{post.title}}</h1><!-- End Entry title -->
+           {% autoescape off %}{{post.content}}<a href="{{post.source}}" target="_blank">Selengkapnya</a>{% endautoescape %}
+        </div><!-- End Entry content -->
+            <div class="bottom_wrapper">
+            <!-- Entry tags -->
+            <div class="entry_tags">
+                <span><i class="fa fa-tags"></i> Label</span>
+                <!-- {{post.tagsplit}} -->
+                <!-- {{post.tags.tagsplit}} -->
+                {% for ta in post.tagsplit %}
+                    <a href="{% url 'tag' ta.tag.tag|slugify %}">{{ta.tag.tag|title}}</a>
+                {% endfor %}
+                
+            </div><!-- End Entry tags -->
+            <!-- Entry categories -->
+            <div class="entry_tags categories">
+                <span><i class="fa fa-folder-open"></i> Kategori</span>
+                <!-- {{post.tags.tagsplit}} -->
+                {% for cat in post.categorysplit %}
+                    <a href="{% url 'category' cat.category.category %}">{{cat.category.category|title }}</a>
+                {% endfor %}
+                
+            </div><!-- End Entry categories -->
+        </div>
+    </article><!-- End Post -->
+    <!-- You might also like -->
     <div class="panel_title">
         <div>
-            <h4><a href="blog.html">TULIS KOMENTAR</a></h4>
+            <h4><a href="blog.html">ARTIKEL PILIHAN</a></h4>
         </div>
     </div>
-    <div id="disqus_thread"></div>
-    <script>
-    (function() { // DON'T EDIT BELOW THIS LINE
-    var d = document, s = d.createElement('script');
-    s.src = 'https://rikhsan.disqus.com/embed.js';
-    s.setAttribute('data-timestamp', +new Date());
-    (d.head || d.body).appendChild(s);
-    })();
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div><!-- End Comments -->
+    <div class="row">
+        {% for ran in randomposts %}
+            {% if forloop.counter|divisibleby:2 %}
+                <div class="col col_4_of_12">
+                    <!-- Layout post 1 -->
+                    <div class="layout_post_1">
+                        <div class="item_thumb">
+                            <div class="thumb_hover">
+                                <a href="{% url 'artikel' ran.id_post ran.title|slugify %}">
+                                    {% if ran.image %}
+                                        <img src="{{ ran.image_thumbnail.url }}" alt="{{ ran.title }}" class="visible animated">
+                                    {% else %}
+                                        <img src="/media/img/noimg.png" alt="{{ ran.title }}" class="visible animated"/>
+                                    {% endif %}
+                                </a>
+                            </div>
+                            <div class="thumb_meta">
+                                <span class="category" jQuery><a href="blog.html">{{ ran.site }}</a></span>
+                                <span class="comments">
+                                    {% for cat in ran.categorysplit %}
+                                        {% if forloop.last %}
+                                            <a href="">{{cat.category.category|title}}</a>
+                                        {% endif %}
+                                    {% endfor %}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="item_content">
+                            <h4><a href="{% url 'artikel' ran.id_post ran.title|slugify %}">{{ ran.title }}</a></h4>
+                            <div class="item_meta clearfix">
+                                <!-- <span class="meta_date">{{ ran.timehuman }}</span> -->
+                                <!-- <span class="meta_likes"><a href="#">29</a></span> -->
+                            </div>
+                            <!-- <p>{{ ran.description }} <a href="{% url 'artikel' ran.id_post ran.title|slugify %}">[...]</a></p> -->
+                        </div>
+                    </div><!-- End Layout post 1 -->
+                </div>
+            {% endif %}
+            
+        {% endfor %}
+    </div><!-- End You might also like -->
+    <div class="row">
+        {% for ran in randomposts %}
+            {% if not forloop.counter|divisibleby:2 %}
+                <div class="col col_4_of_12">
+                    <!-- Layout post 1 -->
+                    <div class="layout_post_1">
+                        <div class="item_thumb">
+                            <div class="thumb_hover">
+                                <a href="{% url 'artikel' ran.id_post ran.title|slugify %}">
+                                    {% if ran.image %}
+                                        <img src="{{ ran.image_thumbnail.url }}" alt="{{ ran.title }}" class="visible animated">
+                                    {% else %}
+                                        <img src="/media/img/noimg.png" alt="{{ ran.title }}" class="visible animated"/>
+                                    {% endif %}
+                                </a>
+                            </div>
+                            <div class="thumb_meta">
+                                <span class="category" jQuery><a href="blog.html">{{ ran.site }}</a></span>
+                                <span class="comments">
+                                    {% for cat in ran.categorysplit %}
+                                        {% if forloop.last %}
+                                            <a href="">{{cat.category.category|title}}</a>
+                                        {% endif %}
+                                    {% endfor %}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="item_content">
+                            <h4><a href="{% url 'artikel' ran.id_post ran.title|slugify %}">{{ ran.title }}</a></h4>
+                            <div class="item_meta clearfix">
+                                <!-- <span class="meta_date">{{ ran.timehuman }}</span> -->
+                                <!-- <span class="meta_likes"><a href="#">29</a></span> -->
+                            </div>
+                            <!-- <p>{{ ran.description }} <a href="{% url 'artikel' ran.id_post ran.title|slugify %}">[...]</a></p> -->
+                        </div>
+                    </div><!-- End Layout post 1 -->
+                </div>
+            {% endif %}
+            
+        {% endfor %}
+    </div><!-- End You might also like -->
+    <!-- Comments -->
+    <div id="comments">
+        <div class="panel_title">
+            <div>
+                <h4><a href="blog.html">TULIS KOMENTAR</a></h4>
+            </div>
+        </div>
+        <div id="disqus_thread"></div>
+        <script>
+        (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        s.src = 'https://rikhsan.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+        })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div><!-- End Comments -->
+</div><!-- End Main content -->
+<!-- Sidebar -->
+<div class="col col_3_of_12">
+    {% include "sidebar.html" %}
+</div><!-- End Sidebar -->
+
+
 {% endblock %}
 
 {% block foot %}

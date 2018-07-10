@@ -34,10 +34,10 @@ sitemaps3 ={
 
 
 urlpatterns = [
-   
+    url(r'^$', views.terbaru, name='home'),
     url(r'^terbaru/([0-9]+)', views.terbaru, name='terbaru'),
     url(r'^terbaru/', views.terbaru, name='terbaru'),
-    url(r'^$', views.terbaru, name='home'),
+    
     url(r'^artikel/([0-9]+)/()', views.post, name='artikel'),
     
     url(r'^category/', views.allcategory, name='category'),
@@ -78,7 +78,9 @@ from django.views.static import serve
 urlpatterns +=[
     url(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT,}),
 ]
-
+urlpatterns +=[
+    url(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT,}),
+]
 # urlpatterns +=[
 #     url(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT,}),
 # ]

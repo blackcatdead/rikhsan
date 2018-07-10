@@ -10,53 +10,61 @@
 {% endblock %}
 
 {% block content %}
-<!-- Page title -->
-<h1 class="page_title"><a href="{% url 'allauthor' %}">Author</a>
-{% if author.number > 1 %}
-	| halaman {{ author.number }}
-{% endif %}</h1><!-- End Page title -->
-<div class="row">
-	{% for aut in author %}
-		<div class="col col_3_of_12">
-            <!-- Top review -->
-            <div class="top_review">
-                <div class="item_content">
-                    <a class="hover_effect" href="{% url 'author' aut.id %}">
-                        <img src="{{ aut.image_thumbnail.url }}" alt="{{ aut.first_name }} {{ aut.last_name }}">
-                    </a>
-                    <h4><a href="{% url 'author' aut.id %}">{{ aut.first_name }} {{ aut.last_name }}</a></h4>
-                </div>
-                <div class="transition_line"></div>
-            </div><!-- End Top review -->
-        </div>
-	{% endfor %}
-</div>
-        <!-- Pagination -->
-{% if author.paginator.num_pages > 1 %}
-	<ul class="page-numbers">
-		{% if not author.number == 1 %}
-			<li><a class="page-numbers" href="{% url 'allauthor' 1 %}"><<</a></li>
-		{% endif %}
-		{% if author.has_previous %}
-			<li><a class="page-numbers" href="{% url 'allauthor' author.previous_page_number %}"><</a></li>
-		{% endif %}
-		{% for i in author.paginator.page_range %}
-			{% if author.number == i %}
-				<li><span class="page-numbers current">{{ i }}</span></li>
-			{% else %}
-				<li><a class="page-numbers" href="{% url 'allauthor' i %}">{{ i }}</a></li>
+<!-- Main content -->
+<div class="col col_9_of_12">
+    <!-- Page title -->
+	<h1 class="page_title"><a href="{% url 'allauthor' %}">Author</a>
+	{% if author.number > 1 %}
+		| halaman {{ author.number }}
+	{% endif %}</h1><!-- End Page title -->
+	<div class="row">
+		{% for aut in author %}
+			<div class="col col_3_of_12">
+	            <!-- Top review -->
+	            <div class="top_review">
+	                <div class="item_content">
+	                    <a class="hover_effect" href="{% url 'author' aut.id %}">
+	                        <img src="{{ aut.image_thumbnail.url }}" alt="{{ aut.first_name }} {{ aut.last_name }}">
+	                    </a>
+	                    <h4><a href="{% url 'author' aut.id %}">{{ aut.first_name }} {{ aut.last_name }}</a></h4>
+	                </div>
+	                <div class="transition_line"></div>
+	            </div><!-- End Top review -->
+	        </div>
+		{% endfor %}
+	</div>
+	        <!-- Pagination -->
+	{% if author.paginator.num_pages > 1 %}
+		<ul class="page-numbers">
+			{% if not author.number == 1 %}
+				<li><a class="page-numbers" href="{% url 'allauthor' 1 %}"><<</a></li>
 			{% endif %}
-		
-	    {% endfor %}
-		{% if author.has_next %}
-			<li><a class="page-numbers" href="{% url 'allauthor' author.next_page_number %}">></a></li>
-		{% endif %}
-		{% if not author.number == author.paginator.num_pages %}
-			<li><a class="page-numbers" href="{% url 'allauthor' author.paginator.num_pages %}">>></a></li>
-		{% endif %}
-	</ul><!-- End Pagination -->
-{% endif %}
-<!-- End Row -->
+			{% if author.has_previous %}
+				<li><a class="page-numbers" href="{% url 'allauthor' author.previous_page_number %}"><</a></li>
+			{% endif %}
+			{% for i in author.paginator.page_range %}
+				{% if author.number == i %}
+					<li><span class="page-numbers current">{{ i }}</span></li>
+				{% else %}
+					<li><a class="page-numbers" href="{% url 'allauthor' i %}">{{ i }}</a></li>
+				{% endif %}
+			
+		    {% endfor %}
+			{% if author.has_next %}
+				<li><a class="page-numbers" href="{% url 'allauthor' author.next_page_number %}">></a></li>
+			{% endif %}
+			{% if not author.number == author.paginator.num_pages %}
+				<li><a class="page-numbers" href="{% url 'allauthor' author.paginator.num_pages %}">>></a></li>
+			{% endif %}
+		</ul><!-- End Pagination -->
+	{% endif %}
+	<!-- End Row -->
+</div><!-- End Main content -->
+<!-- Sidebar -->
+<div class="col col_3_of_12">
+    {% include "sidebar.html" %}
+</div><!-- End Sidebar -->
+
 {% endblock %}
 
 {% block foot %}
