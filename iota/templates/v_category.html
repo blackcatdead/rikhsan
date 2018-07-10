@@ -3,7 +3,8 @@
 {% load humanize %}
 
 {% block head %}
-<meta name="Description" CONTENT="{{ post.description }}">
+<meta content="Berita kategori {{category|title}} - Kumpulan berita mengenai {{category}}." name="description">
+<meta content="{{category|title}}, berita {{category|title}}, kabar {{category|title}} terbaru, {{category|title}} hari ini, berita harian {{category|title}}" name="keywords"/>
 <title>Kategori: {{category|title}} | Rikhsan.com</title>
 <!-- <meta name="robots" content="noindex,nofollow"> -->
 {% endblock %}

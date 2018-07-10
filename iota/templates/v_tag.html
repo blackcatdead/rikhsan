@@ -4,7 +4,8 @@
 
 
 {% block head %}
-<meta name="Description" CONTENT="{{ post.description }}">
+<meta content="Berita tag {{tag|title}} - Kumpulan berita mengenai {{tag}}." name="description">
+<meta content="{{tag|title}}, berita {{tag|title}}, kabar {{tag|title}} terbaru, {{tag|title}} hari ini, berita harian {{tag|title}}" name="keywords"/>
 <title>Tag: {{tag|title}} | Rikhsan.com</title>
 <!-- <meta name="robots" content="noindex,nofollow"> -->
 {% endblock %}
