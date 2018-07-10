@@ -42,7 +42,9 @@
 	    <div class="widget_title"><a href="{% url 'allauthor' %}"><h3>Penulis</h3></a></div>
 	    <div class="tb_widget_banner_125 clearfix">
 	        {% for p in penulis %}
-	            <img src="{{ p.image_thumbnail.url }}" alt="{{ p.first_name }} {{ p.last_name }}">
+	             <a href="{% url 'author' p.id %}">
+	             	<img src="{{ p.image_thumbnail.url }}" alt="{{ p.first_name }} {{ p.last_name }}">
+	            </a>
 	        {% endfor %}
 	    </div>
 	</div><!-- End Widget Banners 125 -->	
