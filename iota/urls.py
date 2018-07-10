@@ -40,7 +40,7 @@ urlpatterns = [
     
     url(r'^artikel/([0-9]+)/()', views.post, name='artikel'),
     
-    url(r'^category/', views.allcategory, name='category'),
+    # url(r'^category/', views.allcategory, name='category'),
     url(r'^category/([\w\-]+)/([0-9]+)', views.showcategory, name='category'),
     url(r'^category/([\w\-]+)', views.showcategory, name='category'),
     url(r'^tag/([\w\-]+)/([0-9]+)', views.showtag, name='tag'),
