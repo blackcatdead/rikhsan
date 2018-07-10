@@ -23,7 +23,7 @@ def xsum2(numbers):
     return sum(numbers)
 
 @app.task
-def topic_kompas(numbers):
+def topic_kompas(url,limit):
 	from sucker.grab.kompas import visitTopic
 	return visitTopic(url,limit)
 
