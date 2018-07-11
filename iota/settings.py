@@ -25,7 +25,7 @@ SECRET_KEY = 'pt!@gmkgct-bafbtd5%f0h1p+_fe23%_d-83e6=0fov&x58$mz'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['localhost','rikhsan.com']
+ALLOWED_HOSTS = ['localhost','rikhsan.com','www.rikhsan.com']
 
 
 # Application definition
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'imagekit',
     'mathfilters',
     'django.contrib.sitemaps',
+    # 'djangosecure'
 ]
 
 MIDDLEWARE = [
@@ -52,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'djangosecure.middleware.SecurityMiddleware',
 ]
 
 ROOT_URLCONF = 'iota.urls'
@@ -150,6 +152,7 @@ CELERY_TASK_SERIALIZER = 'json'
 
 
 AUTH_USER_MODEL = 'sucker.User'
+SECURE_SSL_REDIRECT = True
 # if not DEBUG:
     # SECURE_SSL_REDIRECT = True
 # SESSION_COOKIE_SECURE = True
