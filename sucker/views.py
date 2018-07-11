@@ -9,7 +9,7 @@ from django_celery_results.models import TaskResult
 from sucker.models import Photo, Post, Post_category, Post_tag, Category, Tag
 # Create your views here.
 
-from sucker.grab import grabhelper, kompas, liputan6
+from sucker.grab import grabhelper, kompas, liputan6, quote
 def develop(request):
 	data={}
 	# data= liputan6.artikel("https://www.liputan6.com/bola/read/3577173/jadwal-babak-8-besar-piala-dunia-2018")
@@ -20,7 +20,8 @@ def develop(request):
 	# grabhelper.coba()
 	# return JsonResponse(data, safe=False)
 	# data= kompas.artikel("https://tekno.kompas.com/read/2018/07/06/18430047/ini-merek-yang-dipakai-go-jek-di-vietnam-dan-thailand")
-	data = kompas.visitTopic('https://tekno.kompas.com/',5)
+	# data = kompas.visitTopic('https://tekno.kompas.com/',5)
+	data= quote.grabquote()
 	#done
 	# data= liputan6.visitTopic('https://www.liputan6.com/lifestyle',5)
 	return HttpResponse(str(data))

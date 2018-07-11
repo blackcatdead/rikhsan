@@ -89,6 +89,14 @@ class Post(models.Model):
 	def __str__(self):
 		return self.title
 
+class Quote(models.Model):
+	id_quote = models.AutoField(primary_key=True)
+	quote = models.TextField(blank=True, null=True)
+	user= models.ForeignKey(User, on_delete=models.SET_NULL,null=True)
+
+	def __str__(self):
+		return self.quote
+
 class Photo(models.Model):
 	id_photo = models.AutoField(primary_key=True)
 	id_post = models.IntegerField(blank=True, null=True)
