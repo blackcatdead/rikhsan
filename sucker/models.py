@@ -30,7 +30,7 @@ class User(AbstractUser):
     image_thumbnail = ImageSpecField(source='avatar', processors=[ResizeToFill(200,200)], format='JPEG', options={'quality':60})
 
     def __str__(self):
-		return str(self.username)+' - '+self.first_name+' '+self.last_name+' <img src="'+self.image_thumbnail.url+'" />'
+		return str(self.username)+' - '+self.first_name+' '+self.last_name+' "'+self.description+'"'
 
 
 
