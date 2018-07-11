@@ -21,9 +21,9 @@ def develop(request):
 	# return JsonResponse(data, safe=False)
 	# data= kompas.artikel("https://tekno.kompas.com/read/2018/07/06/18430047/ini-merek-yang-dipakai-go-jek-di-vietnam-dan-thailand")
 	# data = kompas.visitTopic('https://tekno.kompas.com/',5)
-	data= quote.grabquote()
+	# data= quote.grabquote()
 	#done
-	# data= liputan6.visitTopic('https://www.liputan6.com/lifestyle',5)
+	data= liputan6.visitTopic('https://www.liputan6.com/fashion-beauty',100)
 	return HttpResponse(str(data))
 
 def develop2(request):

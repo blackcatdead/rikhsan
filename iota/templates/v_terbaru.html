@@ -65,14 +65,22 @@
             {% if posts.has_previous %}
                 <li><a class="page-numbers" href="{% url 'terbaru' posts.previous_page_number %}"><</a></li>
             {% endif %}
+            {% if posts.number|add:-4 > 0 %}
+                <li>...</li>
+            {% endif %}
             {% for i in posts.paginator.page_range %}
                 {% if posts.number == i %}
                     <li><span class="page-numbers current">{{ i }}</span></li>
                 {% else %}
-                    <li><a class="page-numbers" href="{% url 'terbaru' i %}">{{ i }}</a></li>
+                    {% if i > posts.number|add:-4 and i < posts.number|add:4 %}
+                        <li><a class="page-numbers" href="{% url 'terbaru' i %}">{{ i }}</a></li>
+                    {% endif %}
                 {% endif %}
-            
             {% endfor %}
+            {% if posts.number|add:4 <= posts.paginator.num_pages %}
+                <li>...</li>
+            {% endif %}
+            
             {% if posts.has_next %}
                 <li><a class="page-numbers" href="{% url 'terbaru' posts.next_page_number %}">></a></li>
             {% endif %}
