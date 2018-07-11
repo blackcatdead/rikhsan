@@ -14,6 +14,7 @@
 <!-- Main content -->
 <div class="col col_9_of_12">
     <!-- Post -->
+    <ul class="breadcrumb"><li><a href="{% url 'home' %}">Home</a></li> <li><a href="{% url 'category' post.categorysplit.0.category.category %}">{{ post.categorysplit.0.category.category|title }}</a></li><li>{{post.title}}</li></ul>
     <article class="post">
         {% if post.image %}
             <!-- Media -->

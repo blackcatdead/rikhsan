@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'pt!@gmkgct-bafbtd5%f0h1p+_fe23%_d-83e6=0fov&x58$mz'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['localhost','rikhsan.com']
 
@@ -128,13 +128,15 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
-STATIC_ROOT= os.path.join(BASE_DIR, 'static')
+if not DEBUG:
+    STATIC_ROOT= os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 MEDIA_ROOT= os.path.join(BASE_DIR, 'media')
 MEDIA_URL= '/media/'
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, "static")
-# ]
+if DEBUG:
+    STATICFILES_DIRS = [
+        os.path.join(BASE_DIR, "static")
+    ]
 # STATIC_ROOT= os.path.join(BASE_DIR, 'STATIC')
 # BROKER_URL = 'amqp://redis://localhost:6379/0'
 # CRISPY_TEMPLATE_PACK = 'uni_form'

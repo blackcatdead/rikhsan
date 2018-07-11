@@ -12,11 +12,13 @@
 {% block content %}
 <!-- Main content -->
 <div class="col col_9_of_12">
-    <h1 class="page_title"><a href="{% url 'allcategory' %}">CATEGORY</a> : <a href="{% url 'category' category|slugify %}">{{category|title}}</a> 
+    <ul class="breadcrumb"><li><a href="{% url 'home' %}">Home</a></li> <li>{% if page is not 1 %}<a href="{% url 'category' category %}">{{category|title}}</a> | halaman {{posts.number}}{% else %}{{category|title}}{% endif %}</li></ul>
+    
+   <!--  <h1 class="page_title"><a href="{% url 'allcategory' %}">CATEGORY</a> : <a href="{% url 'category' category|slugify %}">{{category|title}}</a> 
         {% if page is not 1 %}
              | halaman {{posts.number}}
         {% endif %}
-    </h1>                         
+    </h1>         -->                 
     <div class="row">
         <div class="col col_12_of_12">
             <!-- Layout post 1 -->
@@ -42,7 +44,12 @@
                     </div>
                     <div class="item_content">
                         <h4><a href="{% url 'artikel' posts.0.post.id_post posts.0.post.titleslug %}">{{ posts.0.post.title }}</a></h4>
+                        <div class="item_meta clearfix">
+                            <span class="meta_date">{{ posts.0.post.timehuman}}</span>
+                        <!-- <span class="meta_likes"><a href="#">29</a></span> -->
+                        </div>
                         <p>{{  posts.0.post.content2|truncatewords:25 }}</p>
+
                     </div>
                 </div><!-- End Layout post 1 -->
             {% else %}

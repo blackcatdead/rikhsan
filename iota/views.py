@@ -88,7 +88,9 @@ def showauthor(request,page=1):
         'populer': toppost(5,1),
         'author': getpenulis(12,page),
         'terbaru': getlatest(5,1),
-        'tags': toptags(15)
+        'tags': toptags(15),
+        'page': page,
+
     }
 	return HttpResponse(template.render(context, request))
 

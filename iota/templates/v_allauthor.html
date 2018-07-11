@@ -11,11 +11,15 @@
 {% block content %}
 <!-- Main content -->
 <div class="col col_9_of_12">
+	<ul class="breadcrumb"><li><a href="{% url 'home' %}">Home</a></li> <li>{% if page is not 1 %}<a href="{% url 'allauthor' %}">Penulis</a> | halaman {{author.number}}{% else %}Penulis{% endif %}</li></ul>
+	
     <!-- Page title -->
-	<h1 class="page_title"><a href="{% url 'allauthor' %}">Author</a>
+	<h1 class="page_title"><a href="{% url 'allauthor' %}">Penulis</a>
 	{% if author.number > 1 %}
 		| halaman {{ author.number }}
-	{% endif %}</h1><!-- End Page title -->
+	{% endif %}</h1>
+	<!-- End Page title -->
+
 	<div class="row">
 		{% for aut in author %}
 			<div class="col col_3_of_12">
