@@ -7,14 +7,13 @@
 <meta content="Berita tag {{tag|title}} - Kumpulan berita mengenai {{tag}}." name="description">
 <meta content="{{tag|title}}, berita {{tag|title}}, kabar {{tag|title}} terbaru, {{tag|title}} hari ini, berita harian {{tag|title}}" name="keywords"/>
 <title>Tag: {{tag|title}} | Rikhsan.com</title>
-<!-- <meta name="robots" content="noindex,nofollow"> -->
 {% endblock %}
 
 {% block content %}
 <!-- Main content -->
 <div class="col col_9_of_12">
     <ul class="breadcrumb"><li><a href="{% url 'home' %}">Home</a></li> <li><a href="{% url 'alltag' %}">Tag</a></li> <li>{% if page is not 1 %}<a href="{% url 'tag' tag %}">{{tag|title}}</a> | halaman {{posts.number}}{% else %}{{tag|title}}{% endif %}</li></ul>
-    
+
 <!--     <h1 class="page_title"><a href="{% url 'alltag' %}">TAG</a> : <a href="{% url 'tag' tag|slugify %}">{{tag|title}}</a> 
         {% if page is not 1 %}
              | halaman {{posts.number}}

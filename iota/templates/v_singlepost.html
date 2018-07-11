@@ -6,7 +6,6 @@
 <meta content="{{ post.description }}" name="description">
 <meta content="{% for ta in post.tagsplit %}{% if forloop.last %}{{ta.tag.tag|title}}{% else %}{{ta.tag.tag|title}}, {% endif %}{% endfor %}" name="keywords"/>
 <title>{{post.title|title}} | Rikhsan.com</title>
-<!-- <meta name="robots" content="noindex,nofollow"> -->
 
 {% endblock %}
 

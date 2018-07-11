@@ -5,14 +5,13 @@
 
 {% block head %}
 <title>Semua Tag | Rikhsan.com</title>
-<!-- <meta name="robots" content="noindex,nofollow"> -->
 {% endblock %}
 
 {% block content %}
 <!-- Main content -->
 <div class="col col_9_of_12">
     <ul class="breadcrumb"><li><a href="{% url 'home' %}">Home</a></li> <li><a href="{% url 'allauthor' %}">Penulis</a></li> <li>{{ author.username }}</li></ul>
-    
+
     <!-- Page title -->
     <div class="head_title"><h2><a href="{% url 'allauthor' %}">Author</a> | <a href="{% url 'author' author.id %}">{{ author.username }}</a></h2> </div>
     <div class="row">
