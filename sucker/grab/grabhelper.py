@@ -73,12 +73,12 @@ def insert_to_db(d):
 				Category(category=c.lower()).save()
 			Post_category(category=Category.objects.get(category=c.lower()), post=p).save()
 		for t in d['tags'].split(','):
-			if not Tag.objects.filter(tag=t.strip().lower().replace('.', ' ')).count() and len(t.strip().lower()):
-				Tag(tag=t.strip().lower().replace('.', ' ')).save()
+			if not Tag.objects.filter(tag=t.strip().lower().replace('.', ' ').replace('#', '')).count() and len(t.strip().lower()):
+				Tag(tag=t.strip().lower().replace('.', ' ').replace('#', '')).save()
 			# asdasd=Tag.objects.get(tag=t.strip().lower().replace('.', ' '))
 			# print(asdasd.tag)
-			if len(t.strip().lower()):
-				Post_tag(tag=Tag.objects.get(tag=t.strip().lower().replace('.', ' ')), post=p).save()
+			if len(t.strip().lower().replace('.', ' ').replace('#', '')):
+				Post_tag(tag=Tag.objects.get(tag=t.strip().lower().replace('.', ' ').replace('#', '')), post=p).save()
 
 		phda=Photo()
 		phda.source= d['image']
