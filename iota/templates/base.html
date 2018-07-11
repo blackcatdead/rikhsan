@@ -133,6 +133,16 @@
         <script type="text/javascript" src="{% static ''%}trendyblog/js/init.js"></script>    
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         {% block foot %}
-        {% endblock %}    
+        {% endblock %}
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-122180874-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'UA-122180874-1');
+        </script>
+
     </body>
 </html>
