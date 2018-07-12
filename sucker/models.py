@@ -87,13 +87,30 @@ class Post(models.Model):
 	def content3(self):
 		soupz = BeautifulSoup(self.content, 'html.parser')
 		tags = Tag.objects.filter(post_tag__post=self)
-		for tag in tags:
-			for p in soupz.findAll('p'):
-				fixed_text = unicode(p).replace(tag.tag, '<a href="'+reverse('tag', args=[slugify(tag.tag)])+'"> '+tag.tag+' </a>')
+		
+		for p in soupz.findAll('p'):
+			for te in p.findAll(text=True,recursive=False):
+				fixed_text=te
+				for tag in tags:
+					fixed_text = fixed_text.replace(tag.tag.upper(), tag.tag).replace(tag.tag.title(), tag.tag).replace(tag.tag, '<a href="'+reverse('tag', args=[slugify(tag.tag)])+'"> '+tag.tag+' </a>')
+					break
 				newp = BeautifulSoup(fixed_text, 'html.parser')
-    			p.replace_with(newp)
+				te.replace_with(newp)
+				# te.extract()
+				# te2=str(te)
+				# for tag in tags:
+				# 	te2=te2.replace(tag.tag, '<a href="'+reverse('tag', args=[slugify(tag.tag)])+'"> '+tag.tag+' </a>')
+				# 	# asd='<a href="asdasd"></a>'
+				# 	nu=BeautifulSoup(te2, 'html.parser')
+					
+				# 	te.replace_with(nu)
+				# print te
+			# fixed_text=unicode(p)
+			# for tag in tags:
+			# 	fixed_text = fixed_text.replace(tag.tag, '<a href="'+reverse('tag', args=[slugify(tag.tag)])+'"> '+tag.tag+' </a>')
+			# newp = BeautifulSoup(fixed_text, 'html.parser')
+			# p.replace_with(newp)
 
-				# p.text=p.text.replace(tag.tag, 'replaced')
 		return str(soupz)
 
 	def get_absolute_url(self):
