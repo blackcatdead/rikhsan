@@ -34,9 +34,13 @@
         </div><!-- End Full meta -->
         <!-- Entry content -->
         <div class="entry_content">
+            <!-- <center> <div class="addthis_inline_share_toolbox_zbro"></div></center> -->
             <!-- Entry title -->
             <h1 class="entry_title">{{post.title}}</h1><!-- End Entry title -->
-           {% autoescape off %}{{post.content3}}<a href="{{post.source}}" target="_blank">Selengkapnya</a>{% endautoescape %}
+           {% autoescape off %}{{post.content3}}
+           <a href="{{post.source}}" target="_blank">Selengkapnya</a>{% endautoescape %}
+           <center><div class="addthis_inline_share_toolbox_zbro"></div></center>
+          
         </div><!-- End Entry content -->
             <div class="bottom_wrapper">
             <!-- Entry tags -->
@@ -59,6 +63,7 @@
                 
             </div><!-- End Entry categories -->
         </div>
+        
     </article><!-- End Post -->
     <!-- You might also like -->
     <div class="panel_title">
@@ -66,6 +71,7 @@
             <h4><a href="blog.html">ARTIKEL PILIHAN</a></h4>
         </div>
     </div>
+    
     <div class="row">
         {% for ran in randomposts %}
             {% if forloop.counter|divisibleby:2 %}
@@ -107,6 +113,7 @@
             
         {% endfor %}
     </div><!-- End You might also like -->
+
     <div class="row">
         {% for ran in randomposts %}
             {% if not forloop.counter|divisibleby:2 %}
@@ -176,6 +183,9 @@
 {% endblock %}
 
 {% block foot %}
+<!-- Go to www.addthis.com/dashboard to customize your tools --> 
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5adb1bc0578ce338"></script>
+
 <script type="text/javascript">
     $(document).ready(function(){
         $('.stacked').affix({offset: {top: 205} }); 
