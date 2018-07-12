@@ -23,6 +23,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from bs4 import BeautifulSoup
 from django.conf import settings
+from django.urls import reverse
 
 class User(AbstractUser):
     avatar= models.ImageField(blank=True, null=True, upload_to='users')
@@ -82,6 +83,18 @@ class Post(models.Model):
 	def content2(self):
 		soupz = BeautifulSoup(self.content, 'html.parser')
 		return soupz.text
+
+	def content3(self):
+		soupz = BeautifulSoup(self.content, 'html.parser')
+		tags = Tag.objects.filter(post_tag__post=self)
+		for tag in tags:
+			for p in soupz.findAll('p'):
+				fixed_text = unicode(p).replace(tag.tag, '<a href="'+reverse('tag', args=[slugify(tag.tag)])+'"> '+tag.tag+' </a>')
+				newp = BeautifulSoup(fixed_text, 'html.parser')
+    			p.replace_with(newp)
+
+				# p.text=p.text.replace(tag.tag, 'replaced')
+		return str(soupz)
 
 	def get_absolute_url(self):
 		return "/artikel/%i/%s/" % (self.id_post, slugify(self.title))

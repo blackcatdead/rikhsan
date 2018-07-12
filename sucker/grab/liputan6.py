@@ -30,7 +30,7 @@ def visitTopic(url,limit):
 		# print(a['href'])
 		if d['grabbed']>=limit:
 			break
-		if 'liputan6.com' in str(urlparse(a['href']).hostname) and '/read/' in a['href'] and '/top-' not in a['href'] and '/video-' not in a['href'] and '/foto-' not in a['href'] :
+		if 'liputan6.com' in str(urlparse(a['href']).hostname) and '/read/' in a['href'] and '/top-' not in a['href'] and '/video-' not in a['href'] and '/foto-' not in a['href'] and '/hitbingit-' not in a['href']:
 			if not Post.objects.filter(source=a['href'].split('?',1)[0]).count():
 				d['grabbed']+=artikel(a['href'].rsplit('?', 1)[0])['status']
 		
