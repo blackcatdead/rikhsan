@@ -85,32 +85,31 @@ class Post(models.Model):
 		return soupz.text
 
 	def content3(self):
-		soupz = BeautifulSoup(self.content, 'html.parser')
+		# soupz = BeautifulSoup(self.content, 'html.parser')
 		tags = Tag.objects.filter(post_tag__post=self)
-		
-		for p in soupz.findAll('p'):
-			for te in p.findAll(text=True,recursive=False):
-				fixed_text=te
-				for tag in tags:
-					fixed_text = fixed_text.replace(tag.tag.upper(), tag.tag).replace(tag.tag.title(), tag.tag).replace(tag.tag, '<a href="'+reverse('tag', args=[slugify(tag.tag)])+'"> '+tag.tag+' </a>')
-					break
-				newp = BeautifulSoup(fixed_text, 'html.parser')
-				te.replace_with(newp)
-				# te.extract()
-				# te2=str(te)
-				# for tag in tags:
-				# 	te2=te2.replace(tag.tag, '<a href="'+reverse('tag', args=[slugify(tag.tag)])+'"> '+tag.tag+' </a>')
-				# 	# asd='<a href="asdasd"></a>'
-				# 	nu=BeautifulSoup(te2, 'html.parser')
-					
-				# 	te.replace_with(nu)
-				# print te
-			# fixed_text=unicode(p)
-			# for tag in tags:
-			# 	fixed_text = fixed_text.replace(tag.tag, '<a href="'+reverse('tag', args=[slugify(tag.tag)])+'"> '+tag.tag+' </a>')
-			# newp = BeautifulSoup(fixed_text, 'html.parser')
-			# p.replace_with(newp)
+		konten=self.content
+		for tagz in tags:
+			soupz = BeautifulSoup(konten, 'html.parser')
+			for p in soupz.findAll('p'):
+				for te in p.findAll(text=True,recursive=False):
+					# print(tagz.tag+' - '+str(te))
+					fixed_text= str(te)
+					fixed_text = fixed_text.replace(tagz.tag.upper(), tagz.tag).replace(tagz.tag.title(), tagz.tag).replace(tagz.tag, '<a href="'+reverse('tag', args=[slugify(tagz.tag)])+'"> '+tagz.tag+' </a>')
+					newp = BeautifulSoup(fixed_text, 'html.parser')
+					te.replace_with(newp)
+			konten = str(soupz)
 
+		# cats = Category.objects.filter(post_category__post=self)
+		# for catz in cats:
+		# 	soupz = BeautifulSoup(konten, 'html.parser')
+		# 	for p in soupz.findAll('p'):
+		# 		for te in p.findAll(text=True,recursive=False):
+		# 			print(catz.category+' - '+str(te))
+		# 			fixed_text= str(te)
+		# 			fixed_text = fixed_text.replace(catz.category.upper(), catz.category).replace(catz.category.title(),catz.category).replace(catz.category, '<a href="'+reverse('category', args=[slugify(catz.category)])+'"> '+catz.category+' </a>')
+		# 			newp = BeautifulSoup(fixed_text, 'html.parser')
+		# 			te.replace_with(newp)
+		# 	konten = str(soupz)
 		return str(soupz)
 
 	def get_absolute_url(self):
