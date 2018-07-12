@@ -20,6 +20,7 @@ def terbaru(request, page=1):
         'penulis': getpenulis(6,1,True),
         'populer': toppost(5,1),
         'page': page,
+        
     }
 	return HttpResponse(template.render(context, request))
 	
