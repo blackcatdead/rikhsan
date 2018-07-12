@@ -86,9 +86,8 @@ class Post(models.Model):
 
 	def content3(self):
 		# soupz = BeautifulSoup(self.content, 'html.parser')
-		soupz=""
-		tags = Tag.objects.filter(post_tag__post=self)
 		konten=self.content
+		tags = Tag.objects.filter(post_tag__post=self)
 		for tagz in tags:
 			soupz = BeautifulSoup(konten, 'html.parser')
 			for p in soupz.findAll('p'):
@@ -111,7 +110,7 @@ class Post(models.Model):
 		# 			newp = BeautifulSoup(fixed_text, 'html.parser')
 		# 			te.replace_with(newp)
 		# 	konten = str(soupz)
-		return str(soupz)
+		return str(konten)
 
 	def get_absolute_url(self):
 		return "/artikel/%i/%s/" % (self.id_post, slugify(self.title))
