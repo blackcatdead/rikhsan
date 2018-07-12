@@ -181,6 +181,9 @@ class Category(models.Model):
 	def get_absolute_url(self):
 		return "/category/%s/" % (slugify(self.category))
 
+	def __str__(self):
+		return str(self.category)
+
 class Tag(models.Model):
 	id_tag = models.AutoField(primary_key=True)
 	tag = models.CharField(max_length=100, null=True)

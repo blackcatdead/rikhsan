@@ -26,12 +26,15 @@ def develop(request):
 	# data= liputan6.visitTopic('https://www.liputan6.com/fashion-beauty',100)
 
 
-	delete_tags= Tag.objects.filter(tag__contains='seks')
+	# delete_tags= Tag.objects.filter(tag__contains='seks')
 	# delete_category= Category.objects.filter(category__contains='seks')
-	# delete_post_tag = Post_tag.objects.filter(tag__in=delete_tags).delete()
-	Post_tag.objects.filter(tag__in=delete_tags).delete()
-	Tag.objects.filter(tag__contains='seks').delete()
-	Post.objects.filter(title__contains='seks').delete()
+
+	# # delete_post_tag = Post_tag.objects.filter(tag__in=delete_tags).delete()
+	# Post_tag.objects.filter(tag__in=delete_tags).delete()
+	# Post_category.objects.filter(category__in=delete_category).delete()
+	# Tag.objects.filter(tag__contains='seks').delete()
+	# Category.objects.filter(category__contains='seks').delete()
+	# Post.objects.filter(title__contains='seks').delete()
 
 	# delete_post= Post.objects.filter(post_tag__id_)
 	return HttpResponse(str(data))
