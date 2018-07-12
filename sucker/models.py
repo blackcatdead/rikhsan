@@ -86,6 +86,7 @@ class Post(models.Model):
 
 	def content3(self):
 		# soupz = BeautifulSoup(self.content, 'html.parser')
+		soupz=""
 		tags = Tag.objects.filter(post_tag__post=self)
 		konten=self.content
 		for tagz in tags:
