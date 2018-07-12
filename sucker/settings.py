@@ -25,7 +25,7 @@ SECRET_KEY = 'pt!@gmkgct-bafbtd5%f0h1p+_fe23%_d-83e6=0fov&x58$mz'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['localhost','178.128.122.169']
+ALLOWED_HOSTS = ['localhost','178.128.122.169','sukcer.rikhsan.com']
 
 
 # Application definition
