@@ -191,6 +191,9 @@ class Tag(models.Model):
 	def get_absolute_url(self):
 		return "/tag/%s/" % (slugify(self.tag))
 
+	def __str__(self):
+		return str(self.tag)
+
 class Post_category(models.Model):
 	id_post_category = models.AutoField(primary_key=True)
 	category= models.ForeignKey(Category, on_delete=models.SET_NULL,null=True)
