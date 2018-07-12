@@ -23,7 +23,17 @@ def develop(request):
 	# data = kompas.visitTopic('https://tekno.kompas.com/',5)
 	# data= quote.grabquote()
 	#done
-	data= liputan6.visitTopic('https://www.liputan6.com/fashion-beauty',100)
+	# data= liputan6.visitTopic('https://www.liputan6.com/fashion-beauty',100)
+
+
+	delete_tags= Tag.objects.filter(tag__contains='seks')
+	# delete_category= Category.objects.filter(category__contains='seks')
+	# delete_post_tag = Post_tag.objects.filter(tag__in=delete_tags).delete()
+	Post_tag.objects.filter(tag__in=delete_tags).delete()
+	Tag.objects.filter(tag__contains='seks').delete()
+	Post.objects.filter(title__contains='seks').delete()
+
+	# delete_post= Post.objects.filter(post_tag__id_)
 	return HttpResponse(str(data))
 
 def develop2(request):
