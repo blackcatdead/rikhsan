@@ -19,7 +19,7 @@ def develop(request):
 	
 	# grabhelper.coba()
 	# return JsonResponse(data, safe=False)
-	# data= kompas.artikel("https://tekno.kompas.com/read/2018/07/06/18430047/ini-merek-yang-dipakai-go-jek-di-vietnam-dan-thailand")
+	data= kompas.artikel("https://tekno.kompas.com/read/2018/07/06/18430047/ini-merek-yang-dipakai-go-jek-di-vietnam-dan-thailand")
 	# data = kompas.visitTopic('https://tekno.kompas.com/',5)
 	# data= quote.grabquote()
 	#done

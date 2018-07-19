@@ -20,11 +20,11 @@ from sucker import views
 
 urlpatterns = [
     # path(r'^', include(admin.site.urls)),
-    path('', admin.site.urls),
+    url('', admin.site.urls),
     # url(r'^admin/', admin.site.urls),
-    path(r'^develop', views.develop, name='develop'),
-    path(r'^display', views.develop2, name='develop2'),
-    path(r'^reset', views.resetdatabase, name='reset'),
+    url(r'^develop', views.develop, name='develop'),
+    url(r'^display', views.develop2, name='develop2'),
+    url(r'^reset', views.resetdatabase, name='reset'),
 ]
 
 # from django.conf import settings
