@@ -26,14 +26,12 @@ from django.conf import settings
 from django.urls import reverse
 
 class User(AbstractUser):
-    avatar= models.ImageField(blank=True, null=True, upload_to='users')
-    description = models.TextField(blank=True, null=True)
-    image_thumbnail = ImageSpecField(source='avatar', processors=[ResizeToFill(200,200)], format='JPEG', options={'quality':60})
+	avatar= models.ImageField(blank=True, null=True, upload_to='users')
+	description = models.TextField(blank=True, null=True)
+	image_thumbnail = ImageSpecField(source='avatar', processors=[ResizeToFill(200,200)], format='JPEG', options={'quality':60})
 
-    def __str__(self):
-		return str(self.username)+' - '+str(self.first_name)+' '+str(self.last_name)+' "'+str(self.description)+'"'
-
-
+	def __str__(self):
+		return str(self.username)+' - '+str(self.first_name)+' '+str(self.last_name)+' "'+str(self.description)+'" '
 
 class Post(models.Model):
 	id_post = models.AutoField(primary_key=True)

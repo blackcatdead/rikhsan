@@ -4,7 +4,7 @@ from sucker.grab import grabhelper as gh
 from sucker.models import Post
 import requests
 from bs4 import BeautifulSoup
-from urlparse import urlparse
+from urllib.parse import urlparse
 from time import sleep
 
 
@@ -36,7 +36,6 @@ def visit():
 					
 	return d
 
-from urlparse import urlparse
 def visitTopic(url,limit):
 	d={}
 	d['grabbed']=0

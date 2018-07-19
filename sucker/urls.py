@@ -14,15 +14,17 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url,include
+from django.urls import path
 from django.contrib import admin
 from sucker import views
 
 urlpatterns = [
-    url(r'^', include(admin.site.urls)),
+    # path(r'^', include(admin.site.urls)),
+    path('', admin.site.urls),
     # url(r'^admin/', admin.site.urls),
-    url(r'^develop', views.develop, name='develop'),
-    url(r'^display', views.develop2, name='develop2'),
-    url(r'^reset', views.resetdatabase, name='reset'),
+    path(r'^develop', views.develop, name='develop'),
+    path(r'^display', views.develop2, name='develop2'),
+    path(r'^reset', views.resetdatabase, name='reset'),
 ]
 
 # from django.conf import settings
@@ -40,4 +42,5 @@ urlpatterns +=[
 ]
 urlpatterns +=[
     url(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT,}),
+    
 ]

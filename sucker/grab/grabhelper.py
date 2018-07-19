@@ -21,13 +21,12 @@ from django.db import IntegrityError
 from django.shortcuts import render_to_response
 
 from bs4 import BeautifulSoup
-from urlparse import urlparse
+from urllib.parse import urlparse
 from os.path import splitext, basename
 import requests
 import html2text
 import sys 
 import re
-from urlparse import urlparse
 from django_celery_results.models import TaskResult
 from datetime import datetime, timedelta
 import random
@@ -97,7 +96,6 @@ def coba():
 	print('ini coba')
 	Category(category='asdasd').save()
 
-from urlparse import urlparse
 from os.path import splitext, basename
 import requests
 

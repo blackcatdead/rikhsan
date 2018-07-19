@@ -4,7 +4,7 @@ from sucker.grab import grabhelper as gh
 from sucker.models import Post
 import requests
 from bs4 import BeautifulSoup
-from urlparse import urlparse
+from urllib.parse import urlparse
 
 def visit():
 	d={}
@@ -19,7 +19,6 @@ def visit():
 	return d
 
 
-from urlparse import urlparse
 def visitTopic(url,limit):
 	d={}
 	d['grabbed']=0
@@ -79,7 +78,7 @@ def artikel(url):
 					if ele.name=='ul':
 			 			del ele.attrs
 			 			wedo.div.append(ele)
-			 		if ele.name=='p':
+					if ele.name=='p':
 						for a in ele.findAll('a'):
 							a.unwrap()
 						# [x.extract() for x in content.findAll(['strong','b'])]
@@ -92,8 +91,8 @@ def artikel(url):
 						img_alt= ele['data-description']
 						img_alt= ele.text
 						newimg='<figure class="wp-caption aligncenter" jQuery><a href="'+img_src+'" class="popup_link"><img src="'+img_src+'" alt="'+img_alt+'"></a><figcaption class="wp-caption-text">'+img_alt+'</figcaption></figure>'
-		 				figure=BeautifulSoup(newimg, 'html.parser')
-		 				wedo.div.append(figure)
+						figure=BeautifulSoup(newimg, 'html.parser')
+						wedo.div.append(figure)
 		if js_instagram:
 			js=BeautifulSoup('<script async defer src="//www.instagram.com/embed.js"></script>', 'html.parser')
 			wedo.div.append(js)
