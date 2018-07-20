@@ -5,7 +5,7 @@ from sucker.models import Quote,User
 
 import requests
 from bs4 import BeautifulSoup
-from urllib.parse import urlparse
+from urlparse import urlparse
 from django.db.models import Q
 import random
 

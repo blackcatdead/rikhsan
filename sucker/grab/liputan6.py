@@ -4,7 +4,7 @@ from sucker.grab import grabhelper as gh
 from sucker.models import Post
 import requests
 from bs4 import BeautifulSoup
-from urllib.parse import urlparse
+from urlparse import urlparse
 
 def visit():
 	d={}

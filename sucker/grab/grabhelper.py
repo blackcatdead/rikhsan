@@ -21,7 +21,7 @@ from django.db import IntegrityError
 from django.shortcuts import render_to_response
 
 from bs4 import BeautifulSoup
-from urllib.parse import urlparse
+from urlparse import urlparse
 from os.path import splitext, basename
 import requests
 import html2text
