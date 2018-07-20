@@ -18,7 +18,7 @@ def terbaru(request, page=1):
         'posts': getlatest(10,page),
         'tags': toptags(15),
         'penulis': getpenulis(6,1,True),
-        'populer': toppost(5,1),
+        'populer': toppost(10,1),
         'page': page,
         
     }
@@ -32,7 +32,7 @@ def post(request,idd,judul):
 	template = loader.get_template('v_singlepost.html')
 	context = {
 		'page': 'Artikel',
-		'populer': toppost(5,1),
+		'populer': toppost(10,1),
         'post': artikel,
         'terbaru': getlatest(5,1),
         'tags': toptags(15),
@@ -50,7 +50,7 @@ def showcategory(request,cate,page=1):
         'terbaru': getlatest(5,1),
         'tags': toptags(15),
         'page': page,
-        'populer': toppost(5,1),
+        'populer': toppost(10,1),
 		'penulis': getpenulis(4,1,True),
     }
 	return HttpResponse(template.render(context, request))
@@ -64,7 +64,7 @@ def showtag(request,tag,page=1):
         'terbaru': getlatest(5,1),
         'tags': toptags(15),
         'page': page,
-        'populer': toppost(5,1),
+        'populer': toppost(10,1),
 		'penulis': getpenulis(4,1,True),
     }
 	return HttpResponse(template.render(context, request))
@@ -86,7 +86,7 @@ def showauthor(request,page=1):
 	context = {
 		'page': 'All Author',
         # 'posts': getsite(site.replace('-',' '),10,page),
-        'populer': toppost(5,1),
+        'populer': toppost(10,1),
         'author': getpenulis(12,page),
         'terbaru': getlatest(5,1),
         'tags': toptags(15),
@@ -102,7 +102,7 @@ def author(request, id_author, page=1):
 		'page': 'Author',
         # 'posts': getsite(site.replace('-',' '),10,page),
         'author': autho,
-        'populer': toppost(5,1),
+        'populer': toppost(10,1),
         'terbaru': getlatest(5,1),
         'tags': toptags(15),
         'authorpost': getauthorpost(5,page,autho),
@@ -138,7 +138,7 @@ def alltag(request):
 		# 'tags': toptags(15),
 		'terbaru': getlatest(5,1),
         'penulis': getpenulis(6,1,True),
-        'populer': toppost(5,1),
+        'populer': toppost(10,1),
     }
 	return HttpResponse(template.render(context, request))
 
@@ -150,7 +150,7 @@ def allcategory(request):
 		'allcatagory': Category.objects.filter(post_category__post__created_at__lte=timezone.now()).annotate(coun=Count('post_category')).values('category','coun').order_by('category'),
     	'tags': toptags(15),
         'penulis': getpenulis(6,1,True),
-        'populer': toppost(5,1),
+        'populer': toppost(10,1),
     }
 
 	return HttpResponse(template.render(context, request))
@@ -174,7 +174,7 @@ def pencarian(request, page=1):
 		'posts': result,
     	'tags': toptags(15),
         'penulis': getpenulis(6,1,True),
-        'populer': toppost(5,1),
+        'populer': toppost(10,1),
         'query': query,
     }
 	return HttpResponse(template.render(context, request))
